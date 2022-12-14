@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Repository 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yanti.inventorycontroll.domain.repository.aprioriitem.HAprioriItemRepository">
+  <resultMap id="BaseResultMap" type="com.yanti.inventorycontroll.domain.model.aprioriitem.HAprioriItem">
+    <id column="apriori_item_id" jdbcType="BIGINT" property="aprioriItemId" />
+    <result column="apriori_id" jdbcType="BIGINT" property="aprioriId" />
+    <result column="item_id" jdbcType="BIGINT" property="itemId" />
+    <result column="created_by" jdbcType="BIGINT" property="createdBy" />
+    <result column="created_date" jdbcType="TIMESTAMP" property="createdDate" />
+    <result column="updated_by" jdbcType="BIGINT" property="updatedBy" />
+    <result column="updated_date" jdbcType="TIMESTAMP" property="updatedDate" />
+  </resultMap>
+  <sql id="Criteria_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Criteria_Where_Clause">
+    <where>
+      <foreach collection="criteria.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    apriori_item_id, apriori_id, item_id, created_by, created_date, updated_by, updated_date
+  </sql>
+  <select id="selectByCriteria" parameterType="com.yanti.inventorycontroll.domain.model.aprioriitem.HAprioriItemCriteria" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from h_apriori_item
+    <if test="_parameter != null">
+      <include refid="Criteria_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from h_apriori_item
+    where apriori_item_id = #{aprioriItemId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from h_apriori_item
+    where apriori_item_id = #{aprioriItemId,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByCriteria" parameterType="com.yanti.inventorycontroll.domain.model.aprioriitem.HAprioriItemCriteria">
+    delete from h_apriori_item
+    <if test="_parameter != null">
+      <include refid="Criteria_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" keyColumn="apriori_item_id" keyProperty="aprioriItemId" parameterType="com.yanti.inventorycontroll.domain.model.aprioriitem.HAprioriItem" useGeneratedKeys="true">
+    insert into h_apriori_item (apriori_id, item_id, created_by, 
+      created_date, updated_by, updated_date
+      )
+    values (#{aprioriId,jdbcType=BIGINT}, #{itemId,jdbcType=BIGINT}, #{createdBy,jdbcType=BIGINT}, 
+      #{createdDate,jdbcType=TIMESTAMP}, #{updatedBy,jdbcType=BIGINT}, #{updatedDate,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" keyColumn="apriori_item_id" keyProperty="aprioriItemId" parameterType="com.yanti.inventorycontroll.domain.model.aprioriitem.HAprioriItem" useGeneratedKeys="true">
+    insert into h_apriori_item
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="aprioriId != null">
+        apriori_id,
+      </if>
+      <if test="itemId != null">
+        item_id,
+      </if>
+      <if test="createdBy != null">
+        created_by,
+      </if>
+      <if test="createdDate != null">
+        created_date,
+      </if>
+      <if test="updatedBy != null">
+        updated_by,
+      </if>
+      <if test="updatedDate != null">
+        updated_date,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="aprioriId != null">
+        #{aprioriId,jdbcType=BIGINT},
+      </if>
+      <if test="itemId != null">
+        #{itemId,jdbcType=BIGINT},
+      </if>
+      <if test="createdBy != null">
+        #{createdBy,jdbcType=BIGINT},
+      </if>
+      <if test="createdDate != null">
+        #{createdDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedBy != null">
+        #{updatedBy,jdbcType=BIGINT},
+      </if>
+      <if test="updatedDate != null">
+        #{updatedDate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByCriteria" parameterType="com.yanti.inventorycontroll.domain.model.aprioriitem.HAprioriItemCriteria" resultType="java.lang.Long">
+    select count(*) from h_apriori_item
+    <if test="_parameter != null">
+      <include refid="Criteria_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByCriteriaSelective" parameterType="map">
+    update h_apriori_item
+    <set>
+      <if test="row.aprioriItemId != null">
+        apriori_item_id = #{row.aprioriItemId,jdbcType=BIGINT},
+      </if>
+      <if test="row.aprioriId != null">
+        apriori_id = #{row.aprioriId,jdbcType=BIGINT},
+      </if>
+      <if test="row.itemId != null">
+        item_id = #{row.itemId,jdbcType=BIGINT},
+      </if>
+      <if test="row.createdBy != null">
+        created_by = #{row.createdBy,jdbcType=BIGINT},
+      </if>
+      <if test="row.createdDate != null">
+        created_date = #{row.createdDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="row.updatedBy != null">
+        updated_by = #{row.updatedBy,jdbcType=BIGINT},
+      </if>
+      <if test="row.updatedDate != null">
+        updated_date = #{row.updatedDate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="criteria != null">
+      <include refid="Update_By_Criteria_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByCriteria" parameterType="map">
+    update h_apriori_item
+    set apriori_item_id = #{row.aprioriItemId,jdbcType=BIGINT},
+      apriori_id = #{row.aprioriId,jdbcType=BIGINT},
+      item_id = #{row.itemId,jdbcType=BIGINT},
+      created_by = #{row.createdBy,jdbcType=BIGINT},
+      created_date = #{row.createdDate,jdbcType=TIMESTAMP},
+      updated_by = #{row.updatedBy,jdbcType=BIGINT},
+      updated_date = #{row.updatedDate,jdbcType=TIMESTAMP}
+    <if test="criteria != null">
+      <include refid="Update_By_Criteria_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.yanti.inventorycontroll.domain.model.aprioriitem.HAprioriItem">
+    update h_apriori_item
+    <set>
+      <if test="aprioriId != null">
+        apriori_id = #{aprioriId,jdbcType=BIGINT},
+      </if>
+      <if test="itemId != null">
+        item_id = #{itemId,jdbcType=BIGINT},
+      </if>
+      <if test="createdBy != null">
+        created_by = #{createdBy,jdbcType=BIGINT},
+      </if>
+      <if test="createdDate != null">
+        created_date = #{createdDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedBy != null">
+        updated_by = #{updatedBy,jdbcType=BIGINT},
+      </if>
+      <if test="updatedDate != null">
+        updated_date = #{updatedDate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where apriori_item_id = #{aprioriItemId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.yanti.inventorycontroll.domain.model.aprioriitem.HAprioriItem">
+    update h_apriori_item
+    set apriori_id = #{aprioriId,jdbcType=BIGINT},
+      item_id = #{itemId,jdbcType=BIGINT},
+      created_by = #{createdBy,jdbcType=BIGINT},
+      created_date = #{createdDate,jdbcType=TIMESTAMP},
+      updated_by = #{updatedBy,jdbcType=BIGINT},
+      updated_date = #{updatedDate,jdbcType=TIMESTAMP}
+    where apriori_item_id = #{aprioriItemId,jdbcType=BIGINT}
+  </update>
+</mapper>

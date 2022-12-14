@@ -1,0 +1,309 @@
+﻿@font-face {
+    font-family: roboto;
+    src: url(../fonts/Roboto-Black.ttf);
+}
+
+@font-face {
+    font-family: monserrat;
+    src: url(../fonts/Montserrat-Regular.ttf);
+}
+
+* {
+    box-sizing: border-box;
+    
+}
+
+body {
+    /*font-family: Arial, Helvetica, sans-serif;*/
+    font-family: monserrat;
+    margin: 0;
+    border-style: solid;
+    border: none;
+}
+
+/* Style the header */
+header {
+    background: #86134c;
+    padding: 15px;
+    text-align: center;
+    font-size: 15px;
+    /*font-family: "Raleway Thin", sans-serif;*/
+    color: white;
+}
+
+/* Container for flexboxes */
+section {
+    display: -webkit-flex;
+    display: flex;
+}
+
+/* Style the navigation menu */
+.tab {
+    float: left;
+    /*border: 1px solid #bfc1c2;*/
+    background-color: #9c4e75;
+    color: #ffffff;
+    width: 15%;
+    height: auto;
+    min-height:600px;
+    padding-top: -5px !important;
+    font-family: monserrat;
+}
+
+    /* Style the buttons inside the tab */
+    .tab button {
+        display: block;
+        background-color: inherit;
+        color: #ffffff;
+        padding: 15px 10px;
+        width: 100%;
+        border: none;
+        outline: none;
+        text-align: left;
+        cursor: pointer;
+        transition: 0.3s;
+        font-size: 15px;
+    }
+
+        /* Change background color of buttons on hover */
+        .tab button:hover {
+            background-color: #86134c;
+        }
+
+        /* Create an active/current "tab button" class */
+        .tab button.active {
+            background-color: #ccc;
+        }
+
+/* Style the tab content */
+.tabcontent {
+    float: left;
+    padding: 0px 12px;
+    border: none;
+    width: 70%;
+    border-left: none;
+    height: 300px;
+}
+
+/* Style the footer */
+footer {
+    background: -webkit-linear-gradient(bottom, #2dbd6e, #a6f77b);
+    padding: 10px;
+    text-align: center;
+    color: white;
+}
+
+/* Responsive layout - makes the menu and the content (inside the section) sit on top of each other instead of next to each other */
+@media (max-width: 600px) {
+    section {
+        -webkit-flex-direction: column;
+        flex-direction: column;
+    }
+}
+
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+    width: 100%;
+    border: 1px solid #ddd;
+}
+
+td {
+    text-align: left;
+    padding: 8px;
+    border-right: 1px solid #ddd;
+}
+
+th {
+    text-align: center;
+    padding: 8px;
+    border-bottom: 1px #999696 solid !important;
+    border-right: 1px solid #ddd;
+}
+
+tr:nth-child(even) {
+    /*background-color: #f2f2f2*/
+    background-color: #f5d6e6
+}
+
+.content-wrapper{
+    padding:10px 40px 10px 50px;
+    /*font-family: Arial, Helvetica, sans-serif;*/
+    font-family: monserrat;
+    width:85%;
+}
+
+.navbar-link{
+    text-decoration:none !important;
+    padding-left:10px;
+    color: #ffffff !important;
+    font-weight:100;
+    font-family: monserrat;
+    display:block;
+    height:60px;
+    padding-left:20px;
+    padding-top:20px;
+}
+
+.navbar-link.active {
+    background-color: #86134c;
+}
+
+span.badge-danger {
+    background-color: #9c4e75;
+    border-radius: 12px;
+    color: #ffffff;
+    padding: 5px 15px 5px 15px;
+}
+span.badge-success {
+    background-color: #5cb85c;
+    border-radius: 12px;
+    color: #ffffff;
+    padding: 5px 15px 5px 15px;
+}
+
+input[type="text"], select {
+    height: 30px;
+    min-width: 80%;
+    border-color: #e7c5d6;
+    border-radius: 5px;
+    font-size: 16px;
+    font-family: 'monserrat';
+}
+
+input[type="text"]:focus {
+    outline: 3px ridge #a15078
+}
+
+input {
+    border-style: solid !important;
+    font-size: 16px;
+    font-family: 'monserrat';
+}
+
+button{
+    border-style:solid !important;
+    font-family:monserrat;
+    cursor:pointer;
+}
+
+.disabled {
+    pointer-events: none;
+    cursor: default;
+    text-decoration: none;
+    background-color: #a8aaae !important;
+    border-color: #a8aaae !important;
+}
+._center{
+    text-align:center;
+}
+
+.blockUI.blockMsg.blockElement {
+    position: fixed !important;
+    background-color: white !important;
+    /*width:20% !important;*/
+    border: none !important;
+}
+
+.blockUI.blockOverlay {
+    position: fixed !important;
+}
+
+.card {
+    background-color: #f7f7f7;
+    padding: 30px 29px 30px 30px;
+    margin-bottom: 20px;
+    border-radius: 12px;
+    font-size: 16px;
+}
+
+.btn-danger {
+    background-color: #ea5455 !important;
+    border: #ea5455 !important;
+}
+
+.btn-success {
+    background-color: #28c76f !important;
+    border-color: #28c76f !important;
+}
+
+.btn-info {
+    background-color: #7367f0 !important;
+    border-color: #7367f0 !important;
+}
+
+.btn-secondary {
+    background-color: #a8aaae !important;
+    border-color: #a8aaae !important;
+}
+
+.card-form {
+    display: flex;
+    margin-bottom: 10px;
+}
+
+._20 {
+    width: 20%;
+}
+._30 {
+    width: 30%;
+}
+._40 {
+    width: 40%;
+}
+._50 {
+    width: 50%;
+}
+._60 {
+    width: 60%;
+}
+._80 {
+    width: 80%;
+}
+
+
+.form-control {
+    display: block;
+    width: 100%;
+}
+
+.btn {
+    height: 40px;
+    color: #ffffff;
+    background-color: #86134c;
+    padding: 5px 20px 5px 20px;
+    border-color: #86134c;
+    border-radius: 25px;
+    font-size: 16px;
+}
+
+.pager {
+    margin-top: 20px;
+}
+
+.devider {
+    margin-left: 20px;
+}
+
+.card-header .card-title h2 {
+    color: #86134c;
+}
+
+span.text-danger {
+    color: #ea5455;
+    font-weight: bold;
+}
+
+.alert-danger {
+    width: 100%;
+    background-color: #ea5455;
+    padding: 20px;
+    border-radius: 12px;
+    margin-bottom: 10px;
+    color: white;
+}
+
+a {
+	color: inherit;
+	text-decoration:none;
+}

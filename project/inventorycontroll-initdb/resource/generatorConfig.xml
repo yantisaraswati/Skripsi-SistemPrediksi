@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator 
+Configuration 1.0//EN" "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd" >
+<generatorConfiguration>
+	<classPathEntry location="D:\data\postgresql-42.4.0.jar" />
+	<context id="context1" targetRuntime="MyBatis3" defaultModelType="flat">
+		<commentGenerator>
+			<property name="suppressAllComments" value="true" />
+		</commentGenerator>
+		
+		<jdbcConnection 
+			driverClass="org.postgresql.Driver"
+			connectionURL="jdbc:postgresql://localhost/inventorycontroll" 
+			userId="postgres"
+			password="ndid123" />		
+		
+		<!-- Transaction Package -->
+		<javaModelGenerator targetPackage="com.yanti.inventorycontroll.domain.model.requestitem" 
+			targetProject="inventorycontroll-domain/src/main/java" />
+		<sqlMapGenerator targetPackage="com.yanti.inventorycontroll.domain.repository.requestitem" 
+			targetProject="inventorycontroll-domain/src/main/resources" />
+		<javaClientGenerator targetPackage="com.yanti.inventorycontroll.domain.repository.requestitem" 
+			targetProject="inventorycontroll-domain/src/main/java" type="XMLMAPPER" />
+			
+		<table schema="public" tableName="t_request_item">
+			<property name="ignoreQualifiersAtRuntime" value="true" />
+			<generatedKey column="request_item_id" sqlStatement="JDBC" identity="true" />
+		</table>
+	</context>
+</generatorConfiguration>
