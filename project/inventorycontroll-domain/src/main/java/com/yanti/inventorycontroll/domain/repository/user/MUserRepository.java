@@ -27,4 +27,6 @@ public interface MUserRepository {
     int updateByPrimaryKeySelective(MUser row);
 
     int updateByPrimaryKey(MUser row);
+    
+    MUser findOneByUsername(@Param("username") String username);
 }
