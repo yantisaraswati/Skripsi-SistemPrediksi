@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<%@page import="com.yanti.inventorycontroll.domain.dto.user.User"%>
 <html class="no-js">
 <head>
 	<meta charset="utf-8" />
@@ -12,6 +13,15 @@
 	<c:set var="titleKey">
 	    <tiles:insertAttribute name="title" ignore="true" />
 	</c:set>
+	<%
+		HttpSession sessUser = request.getSession(true);
+		User session = (User) sessUser.getAttribute("userSession");
+	%>
+	<script type="text/javascript">
+		var CONTEXT_PATH = "<%=request.getContextPath()%>";
+		var ACCOUNT_ID = <%=session.getUserId()%>
+	</script>
+	
 	<title><spring:message code="${titleKey}" text="Inventory Controll System" /></title>
 </head>
 <body>

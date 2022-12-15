@@ -9,14 +9,42 @@
 
     <sec:http pattern="/resources/**" security="none"/>
     <sec:http>
-        <sec:form-login/>
-        <sec:logout/>
+        <sec:form-login
+        	login-page="/login"
+        	login-processing-url="/login/authchecking"
+            authentication-success-handler-ref="redirectSuccessHandler"
+            authentication-failure-handler-ref="redirectErrorHandler"
+        	/>
+        <sec:intercept-url pattern="/login/**" access="permitAll" />
+        <sec:intercept-url pattern="/**" access="isAuthenticated()" />
+        <sec:logout invalidate-session="true"/>
         <sec:access-denied-handler ref="accessDeniedHandler"/>
         <sec:custom-filter ref="userIdMDCPutFilter" after="ANONYMOUS_FILTER"/>
         <sec:session-management />
+        <sec:csrf disabled="true" />
     </sec:http>
 
-    <sec:authentication-manager />
+    <sec:authentication-manager id="userAuthenticationManager">
+        <sec:authentication-provider user-service-ref="userDetailsService">
+            <sec:password-encoder ref="passwordEncoder"/>
+        </sec:authentication-provider>
+    </sec:authentication-manager>
+
+	<bean id="userDetailsService" class="com.yanti.inventorycontroll.app.login.CustomUserDetailsService"> </bean>
+    
+    <bean id="passwordEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder" />
+
+	<bean id="redirectSuccessHandler"
+          class="com.yanti.inventorycontroll.app.login.AuthenticationSuccessHandlerEx">
+        <property name="defaultTargetUrl" value="/"/>
+    </bean>
+
+    <bean id="redirectErrorHandler"
+          class="com.yanti.inventorycontroll.app.login.AuthenticationFailureHandlerEx">
+        <property name="defaultFailureUrl" value="/login/failed" />
+        <property name="useForward" value="true" />
+    </bean>
+
 
     <!-- CSRF Protection -->
     <bean id="accessDeniedHandler"
