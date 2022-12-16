@@ -114,6 +114,11 @@
             <artifactId>lombok</artifactId>
             <scope>provided</scope>
         </dependency>
+        <dependency>
+		    <groupId>com.github.dpaukov</groupId>
+		    <artifactId>combinatoricslib3</artifactId>
+		    <version>3.3.3</version>
+		</dependency>
         <!-- == End Coding Support == -->
 
     </dependencies>
