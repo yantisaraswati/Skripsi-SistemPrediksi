@@ -1,0 +1,285 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yanti.inventorycontroll.domain.repository.aprioriassociation.HAprioriAssociationRepository">
+  <resultMap id="BaseResultMap" type="com.yanti.inventorycontroll.domain.model.aprioriassociation.HAprioriAssociation">
+    <id column="apriori_association_id" jdbcType="BIGINT" property="aprioriAssociationId" />
+    <result column="apriori_id" jdbcType="BIGINT" property="aprioriId" />
+    <result column="rules" jdbcType="VARCHAR" property="rules" />
+    <result column="support" jdbcType="INTEGER" property="support" />
+    <result column="confidence" jdbcType="INTEGER" property="confidence" />
+    <result column="support_confidence" jdbcType="INTEGER" property="supportConfidence" />
+    <result column="created_by" jdbcType="BIGINT" property="createdBy" />
+    <result column="created_date" jdbcType="TIMESTAMP" property="createdDate" />
+    <result column="updated_by" jdbcType="BIGINT" property="updatedBy" />
+    <result column="updated_date" jdbcType="TIMESTAMP" property="updatedDate" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    apriori_association_id, apriori_id, rules, support, confidence, support_confidence, 
+    created_by, created_date, updated_by, updated_date
+  </sql>
+  <select id="selectByCriteria" parameterType="com.yanti.inventorycontroll.domain.model.aprioriassociation.HAprioriAssociationCriteria" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from h_apriori_association
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from h_apriori_association
+    where apriori_association_id = #{aprioriAssociationId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from h_apriori_association
+    where apriori_association_id = #{aprioriAssociationId,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByCriteria" parameterType="com.yanti.inventorycontroll.domain.model.aprioriassociation.HAprioriAssociationCriteria">
+    delete from h_apriori_association
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" keyColumn="apriori_association_id" keyProperty="aprioriAssociationId" parameterType="com.yanti.inventorycontroll.domain.model.aprioriassociation.HAprioriAssociation" useGeneratedKeys="true">
+    insert into h_apriori_association (apriori_id, rules, support, 
+      confidence, support_confidence, created_by, 
+      created_date, updated_by, updated_date
+      )
+    values (#{aprioriId,jdbcType=BIGINT}, #{rules,jdbcType=VARCHAR}, #{support,jdbcType=INTEGER}, 
+      #{confidence,jdbcType=INTEGER}, #{supportConfidence,jdbcType=INTEGER}, #{createdBy,jdbcType=BIGINT}, 
+      #{createdDate,jdbcType=TIMESTAMP}, #{updatedBy,jdbcType=BIGINT}, #{updatedDate,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" keyColumn="apriori_association_id" keyProperty="aprioriAssociationId" parameterType="com.yanti.inventorycontroll.domain.model.aprioriassociation.HAprioriAssociation" useGeneratedKeys="true">
+    insert into h_apriori_association
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="aprioriId != null">
+        apriori_id,
+      </if>
+      <if test="rules != null">
+        rules,
+      </if>
+      <if test="support != null">
+        support,
+      </if>
+      <if test="confidence != null">
+        confidence,
+      </if>
+      <if test="supportConfidence != null">
+        support_confidence,
+      </if>
+      <if test="createdBy != null">
+        created_by,
+      </if>
+      <if test="createdDate != null">
+        created_date,
+      </if>
+      <if test="updatedBy != null">
+        updated_by,
+      </if>
+      <if test="updatedDate != null">
+        updated_date,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="aprioriId != null">
+        #{aprioriId,jdbcType=BIGINT},
+      </if>
+      <if test="rules != null">
+        #{rules,jdbcType=VARCHAR},
+      </if>
+      <if test="support != null">
+        #{support,jdbcType=INTEGER},
+      </if>
+      <if test="confidence != null">
+        #{confidence,jdbcType=INTEGER},
+      </if>
+      <if test="supportConfidence != null">
+        #{supportConfidence,jdbcType=INTEGER},
+      </if>
+      <if test="createdBy != null">
+        #{createdBy,jdbcType=BIGINT},
+      </if>
+      <if test="createdDate != null">
+        #{createdDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedBy != null">
+        #{updatedBy,jdbcType=BIGINT},
+      </if>
+      <if test="updatedDate != null">
+        #{updatedDate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByCriteria" parameterType="com.yanti.inventorycontroll.domain.model.aprioriassociation.HAprioriAssociationCriteria" resultType="java.lang.Long">
+    select count(*) from h_apriori_association
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByCriteriaSelective" parameterType="map">
+    update h_apriori_association
+    <set>
+      <if test="row.aprioriAssociationId != null">
+        apriori_association_id = #{row.aprioriAssociationId,jdbcType=BIGINT},
+      </if>
+      <if test="row.aprioriId != null">
+        apriori_id = #{row.aprioriId,jdbcType=BIGINT},
+      </if>
+      <if test="row.rules != null">
+        rules = #{row.rules,jdbcType=VARCHAR},
+      </if>
+      <if test="row.support != null">
+        support = #{row.support,jdbcType=INTEGER},
+      </if>
+      <if test="row.confidence != null">
+        confidence = #{row.confidence,jdbcType=INTEGER},
+      </if>
+      <if test="row.supportConfidence != null">
+        support_confidence = #{row.supportConfidence,jdbcType=INTEGER},
+      </if>
+      <if test="row.createdBy != null">
+        created_by = #{row.createdBy,jdbcType=BIGINT},
+      </if>
+      <if test="row.createdDate != null">
+        created_date = #{row.createdDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="row.updatedBy != null">
+        updated_by = #{row.updatedBy,jdbcType=BIGINT},
+      </if>
+      <if test="row.updatedDate != null">
+        updated_date = #{row.updatedDate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="example != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByCriteria" parameterType="map">
+    update h_apriori_association
+    set apriori_association_id = #{row.aprioriAssociationId,jdbcType=BIGINT},
+      apriori_id = #{row.aprioriId,jdbcType=BIGINT},
+      rules = #{row.rules,jdbcType=VARCHAR},
+      support = #{row.support,jdbcType=INTEGER},
+      confidence = #{row.confidence,jdbcType=INTEGER},
+      support_confidence = #{row.supportConfidence,jdbcType=INTEGER},
+      created_by = #{row.createdBy,jdbcType=BIGINT},
+      created_date = #{row.createdDate,jdbcType=TIMESTAMP},
+      updated_by = #{row.updatedBy,jdbcType=BIGINT},
+      updated_date = #{row.updatedDate,jdbcType=TIMESTAMP}
+    <if test="example != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.yanti.inventorycontroll.domain.model.aprioriassociation.HAprioriAssociation">
+    update h_apriori_association
+    <set>
+      <if test="aprioriId != null">
+        apriori_id = #{aprioriId,jdbcType=BIGINT},
+      </if>
+      <if test="rules != null">
+        rules = #{rules,jdbcType=VARCHAR},
+      </if>
+      <if test="support != null">
+        support = #{support,jdbcType=INTEGER},
+      </if>
+      <if test="confidence != null">
+        confidence = #{confidence,jdbcType=INTEGER},
+      </if>
+      <if test="supportConfidence != null">
+        support_confidence = #{supportConfidence,jdbcType=INTEGER},
+      </if>
+      <if test="createdBy != null">
+        created_by = #{createdBy,jdbcType=BIGINT},
+      </if>
+      <if test="createdDate != null">
+        created_date = #{createdDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedBy != null">
+        updated_by = #{updatedBy,jdbcType=BIGINT},
+      </if>
+      <if test="updatedDate != null">
+        updated_date = #{updatedDate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where apriori_association_id = #{aprioriAssociationId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.yanti.inventorycontroll.domain.model.aprioriassociation.HAprioriAssociation">
+    update h_apriori_association
+    set apriori_id = #{aprioriId,jdbcType=BIGINT},
+      rules = #{rules,jdbcType=VARCHAR},
+      support = #{support,jdbcType=INTEGER},
+      confidence = #{confidence,jdbcType=INTEGER},
+      support_confidence = #{supportConfidence,jdbcType=INTEGER},
+      created_by = #{createdBy,jdbcType=BIGINT},
+      created_date = #{createdDate,jdbcType=TIMESTAMP},
+      updated_by = #{updatedBy,jdbcType=BIGINT},
+      updated_date = #{updatedDate,jdbcType=TIMESTAMP}
+    where apriori_association_id = #{aprioriAssociationId,jdbcType=BIGINT}
+  </update>
+</mapper>

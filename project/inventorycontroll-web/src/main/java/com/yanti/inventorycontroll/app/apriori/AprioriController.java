@@ -41,7 +41,7 @@ public class AprioriController {
 		input.setMinConfidence((Integer) model.asMap().get("minConfidence"));
 		input.setOrganizationId((Long) model.asMap().get("organizationId"));
 		AprioriLoadServiceOutputBean output = aprioriLoadService.execute(input);
-		model.addAttribute("message", output.getMessage() != null ? output.getMessage() : (String) model.asMap().get("message"));
+		model.addAttribute("message", (String) model.asMap().get("message") != null ? (String) model.asMap().get("message") : output.getMessage());
 		model.addAttribute("organizationList", output.getOrganizationList());
 		model.addAttribute("itemSetSupportList", output.getItemSetSupportList());
 		model.addAttribute("associationRuleList", output.getAssociationRuleList());

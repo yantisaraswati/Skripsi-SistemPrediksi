@@ -9,12 +9,16 @@ import org.springframework.stereotype.Service;
 
 import com.yanti.inventorycontroll.domain.bean.apriori.AprioriLoadServiceInputBean;
 import com.yanti.inventorycontroll.domain.bean.apriori.AprioriLoadServiceOutputBean;
+import com.yanti.inventorycontroll.domain.dto.apriori.AssociationRule;
 import com.yanti.inventorycontroll.domain.dto.apriori.ItemSetSupport;
 import com.yanti.inventorycontroll.domain.model.apriori.HApriori;
 import com.yanti.inventorycontroll.domain.model.apriori.HAprioriCriteria;
+import com.yanti.inventorycontroll.domain.model.aprioriassociation.HAprioriAssociation;
+import com.yanti.inventorycontroll.domain.model.aprioriassociation.HAprioriAssociationCriteria;
 import com.yanti.inventorycontroll.domain.model.apriorisupport.HAprioriSupport;
 import com.yanti.inventorycontroll.domain.model.apriorisupport.HAprioriSupportCriteria;
 import com.yanti.inventorycontroll.domain.repository.apriori.HAprioriRepository;
+import com.yanti.inventorycontroll.domain.repository.aprioriassociation.HAprioriAssociationRepository;
 import com.yanti.inventorycontroll.domain.repository.apriorisupport.HAprioriSupportRepository;
 import com.yanti.inventorycontroll.domain.repository.apriorisupportitem.HAprioriSupportItemRepository;
 import com.yanti.inventorycontroll.domain.repository.organization.MOrganizationRepository;
@@ -33,6 +37,8 @@ public class AprioriLoadServiceImpl implements AprioriLoadService {
 	private HAprioriSupportRepository aprioriSupportRepo;
 	@Inject
 	private HAprioriSupportItemRepository aprioriSupportItemRepo;
+	@Inject
+	private HAprioriAssociationRepository aprioriAssociationRepo;
 
 	public AprioriLoadServiceOutputBean execute(AprioriLoadServiceInputBean input) {
 		AprioriLoadServiceOutputBean output = new AprioriLoadServiceOutputBean();
@@ -41,6 +47,9 @@ public class AprioriLoadServiceImpl implements AprioriLoadService {
 				HApriori apriori = getApriori(input);
 				if (apriori != null) {
 					output.setItemSetSupportList(getItemSetSupport(apriori));
+					output.setAssociationRuleList(getAssociationRule(apriori.getAprioriId()));
+					if(output.getAssociationRuleList().isEmpty() || output.getAssociationRuleList().size() > output.getItemSetSupportList().size() * 2)
+						output.setMessage("Hasil kemungkinan tidak valid dikarenakan nilai support yang terlalu kecil atau data transaksi yang kurang komprehensif.");
 				} else {
 					output.setMessage("Data tidak ditemukan, silahkan proses terlebih dahulu.");
 				}
@@ -50,6 +59,24 @@ public class AprioriLoadServiceImpl implements AprioriLoadService {
 			log.error("Error ", e);
 		}
 		return output;
+	}
+
+	private List<AssociationRule> getAssociationRule(Long aprioriId) {
+		List<AssociationRule> associationRuleList = new ArrayList<>();
+
+		HAprioriAssociationCriteria aprioriAssociationC = new HAprioriAssociationCriteria();
+		aprioriAssociationC.createCriteria().andAprioriIdEqualTo(aprioriId);
+		aprioriAssociationC.setOrderByClause("apriori_association_id");
+		List<HAprioriAssociation> associationList = aprioriAssociationRepo.selectByCriteria(aprioriAssociationC);
+		for (HAprioriAssociation association : associationList) {
+			AssociationRule rule = new AssociationRule();
+			rule.setRules(association.getRules());
+			rule.setSupport(association.getSupport());
+			rule.setConfidence(association.getConfidence());
+			rule.setSuppTimesConfidence(association.getSupportConfidence());
+			associationRuleList.add(rule);
+		}
+		return associationRuleList;
 	}
 
 	private List<ItemSetSupport> getItemSetSupport(HApriori apriori) {

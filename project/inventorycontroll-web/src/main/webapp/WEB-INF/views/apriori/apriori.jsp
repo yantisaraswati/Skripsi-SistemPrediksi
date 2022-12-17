@@ -49,7 +49,7 @@
 				<div class="card">
 				    <div class="card-header">
 				        <div class="card-title">
-				            <h2>Support Count</h2>
+				            <h2>Support Count (${itemSetSupportList.size()} hasil)</h2>
 				        </div>
 				    </div>
 				    <div class="card-body">
@@ -60,7 +60,7 @@
 						            <th>Bidang</th>
 						            <th>K-Item</th>
 						            <th>Daftar Barang</th>
-						            <th>Support</th>
+						            <th>Support (%)</th>
 						        </tr>
 						    </thead>
 						    <tbody>
@@ -78,14 +78,34 @@
 				    </div>
 				</div>
 			</c:if>
-			<c:if test="${!empty itemSetSupportList}">
+			<c:if test="${!empty associationRuleList}">
 				<div class="card">
 				    <div class="card-header">
 				        <div class="card-title">
-				            <h2>Association Rules</h2>
+				            <h2>Association Rules (${associationRuleList.size()} hasil)</h2>
 				        </div>
 				    </div>
 				    <div class="card-body">
+				    	<table>
+						    <thead>
+						        <tr>
+						            <th>Rules</th>
+						            <th>Support (%)</th>
+						            <th>Confidence (%)</th>
+						            <th>Support * Confidence (%)</th>
+						        </tr>
+						    </thead>
+						    <tbody>
+							    <c:forEach var="rule" items="${associationRuleList}">
+							    	<tr>
+					                    <td style="width:70%;">${rule.rules}</td>
+					                    <td style="width:10%;" class="_center">${rule.support}</td>
+					                    <td style="width:10%;" class="_center">${rule.confidence}</td>
+					                    <td style="width:10%;" class="_center">${rule.suppTimesConfidence}</td>
+					                </tr>
+							    </c:forEach>
+						    </tbody>
+					    </table>
 				    </div>
 				</div>
 			</c:if>

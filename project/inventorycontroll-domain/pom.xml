@@ -94,6 +94,11 @@
             <artifactId>tomcat-embed-el</artifactId>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>org.jmockit</groupId>
+            <artifactId>jmockit</artifactId>
+            <version>1.8</version>
+        </dependency>
         <!--  REMOVE THIS LINE IF YOU USE Spring Test DBUnit
         <dependency>
             <groupId>org.dbunit</groupId>

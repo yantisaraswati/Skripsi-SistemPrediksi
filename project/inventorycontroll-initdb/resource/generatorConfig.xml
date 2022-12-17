@@ -21,16 +21,16 @@ Configuration 1.0//EN" "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd"
 			password="ndid123" />		
 		
 		<!-- Transaction Package -->
-		<javaModelGenerator targetPackage="com.yanti.inventorycontroll.domain.model.apriorisupportitem" 
+		<javaModelGenerator targetPackage="com.yanti.inventorycontroll.domain.model.aprioriassociationitem" 
 			targetProject="inventorycontroll-domain/src/main/java" />
-		<sqlMapGenerator targetPackage="com.yanti.inventorycontroll.domain.repository.apriorisupportitem" 
+		<sqlMapGenerator targetPackage="com.yanti.inventorycontroll.domain.repository.aprioriassociationitem" 
 			targetProject="inventorycontroll-domain/src/main/resources" />
-		<javaClientGenerator targetPackage="com.yanti.inventorycontroll.domain.repository.apriorisupportitem" 
+		<javaClientGenerator targetPackage="com.yanti.inventorycontroll.domain.repository.aprioriassociationitem" 
 			targetProject="inventorycontroll-domain/src/main/java" type="XMLMAPPER" />
 			
-		<table schema="public" tableName="h_apriori_support_item">
+		<table schema="public" tableName="h_apriori_association_item">
 			<property name="ignoreQualifiersAtRuntime" value="true" />
-			<generatedKey column="apriori_support_item_id" sqlStatement="JDBC" identity="true" />
+			<generatedKey column="apriori_association_item_id" sqlStatement="JDBC" identity="true" />
 		</table>
 	</context>
 </generatorConfiguration>
