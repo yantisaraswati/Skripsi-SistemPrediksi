@@ -5,15 +5,15 @@
 			<div class="card">
 			    <div class="card-body">
 			        <div class="card-form">
-			            <div class="card-label _20">Min Support </div>
+			            <div class="card-label _20">Min Support (%) </div>
 			            <div class="form-control _80">
-			                : <input type="number" name="minSupport" min="1" max="100" required value="${aprioriForm.minSupport}"/>%
+			                : <input type="number" name="minSupport" min="1" max="100" required value="${aprioriForm.minSupport}"/>
 			            </div>
 			        </div>
 			        <div class="card-form">
-			            <div class="card-label _20">Min Confidence </div>
+			            <div class="card-label _20">Min Confidence (%) </div>
 			            <div class="form-control _80">
-			                : <input type="number" name="minConfidence" min="1" max="100" required value="${aprioriForm.minConfidence}"/>%
+			                : <input type="number" name="minConfidence" min="1" max="100" required value="${aprioriForm.minConfidence}"/>
 			            </div>
 			        </div>
 			        <div class="card-form">
@@ -42,6 +42,51 @@
 				<div class="alert-danger">
 				    <i class="fa fa-warning"></i> Peringatan!<br />
 				    <div class="alert-body">${message}</div>
+				</div>
+			</c:if>
+			
+			<c:if test="${!empty itemSetSupportList}">
+				<div class="card">
+				    <div class="card-header">
+				        <div class="card-title">
+				            <h2>Support Count</h2>
+				        </div>
+				    </div>
+				    <div class="card-body">
+				        <table>
+						    <thead>
+						        <tr>
+						            <th>Tanggal Diproses</th>
+						            <th>Bidang</th>
+						            <th>K-Item</th>
+						            <th>Daftar Barang</th>
+						            <th>Support</th>
+						        </tr>
+						    </thead>
+						    <tbody>
+							    <c:forEach var="itemSupport" items="${itemSetSupportList}">
+							    	<tr>
+					                    <td style="width:15%;" class="_center"><fmt:formatDate pattern="dd MMM yyyy" value="${itemSupport.createdDate}" /></td>
+					                    <td style="width:25%;">${itemSupport.organization}</td>
+					                    <td style="width:10%;">${itemSupport.KItem}</td>
+					                    <td style="width:50%;">${itemSupport.itemName}</td>
+					                    <td style="width:5%;" class="_center">${itemSupport.support}</td>
+					                </tr>
+							    </c:forEach>
+						    </tbody>
+					    </table>
+				    </div>
+				</div>
+			</c:if>
+			<c:if test="${!empty itemSetSupportList}">
+				<div class="card">
+				    <div class="card-header">
+				        <div class="card-title">
+				            <h2>Association Rules</h2>
+				        </div>
+				    </div>
+				    <div class="card-body">
+				    </div>
 				</div>
 			</c:if>
 		</form:form>

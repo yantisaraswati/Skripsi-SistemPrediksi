@@ -6,8 +6,9 @@ import lombok.Data;
 
 @Data
 public class ItemSetSupport {
-	private String itemName;
-	private String unit;
 	private Date createdDate;
-	private String createdBy;
+	private String organization;
+	private String kItem;
+	private String itemName;
+	private Integer support;
 }

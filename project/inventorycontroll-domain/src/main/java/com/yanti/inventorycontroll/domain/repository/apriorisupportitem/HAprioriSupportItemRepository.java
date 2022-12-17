@@ -27,4 +27,6 @@ public interface HAprioriSupportItemRepository {
     int updateByPrimaryKeySelective(HAprioriSupportItem row);
 
     int updateByPrimaryKey(HAprioriSupportItem row);
+
+	String concatSupportItems(@Param("aprioriSupportId") Long aprioriSupportId);
 }

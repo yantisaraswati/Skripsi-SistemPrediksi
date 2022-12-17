@@ -41,7 +41,7 @@ public class AprioriController {
 		input.setMinConfidence((Integer) model.asMap().get("minConfidence"));
 		input.setOrganizationId((Long) model.asMap().get("organizationId"));
 		AprioriLoadServiceOutputBean output = aprioriLoadService.execute(input);
-		model.addAttribute("message", (String) model.asMap().get("message"));
+		model.addAttribute("message", output.getMessage() != null ? output.getMessage() : (String) model.asMap().get("message"));
 		model.addAttribute("organizationList", output.getOrganizationList());
 		model.addAttribute("itemSetSupportList", output.getItemSetSupportList());
 		model.addAttribute("associationRuleList", output.getAssociationRuleList());
@@ -76,6 +76,9 @@ public class AprioriController {
 		input.setMinConfidence(form.getMinConfidence());
 		input.setOrganizationId(form.getOrganizationId());
 		AprioriCalculateServiceOutputBean output = aprioriCalculateService.execute(input);
+		redirectAttributes.addFlashAttribute("minSupport", form.getMinSupport());
+		redirectAttributes.addFlashAttribute("minConfidence", form.getMinConfidence());
+		redirectAttributes.addFlashAttribute("organizationId", form.getOrganizationId());
 		if(!output.getSuccess()) {
 			redirectAttributes.addFlashAttribute("message", output.getMessage());
 		}

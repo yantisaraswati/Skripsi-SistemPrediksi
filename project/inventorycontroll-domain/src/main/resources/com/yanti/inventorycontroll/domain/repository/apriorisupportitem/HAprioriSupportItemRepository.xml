@@ -250,4 +250,12 @@
       updated_date = #{updatedDate,jdbcType=TIMESTAMP}
     where apriori_support_item_id = #{aprioriSupportItemId,jdbcType=BIGINT}
   </update>
+  
+  <select id="concatSupportItems" resultType="String">
+  	select STRING_AGG(i.item_name, ', ' order by asi.seq) as item_name
+	from h_apriori_support aps
+		join h_apriori_support_item asi on asi.apriori_support_id = aps.apriori_support_id
+		join m_item i on i.item_id = asi.item_id
+	where aps.apriori_support_id = #{aprioriSupportId}
+  </select>
 </mapper>

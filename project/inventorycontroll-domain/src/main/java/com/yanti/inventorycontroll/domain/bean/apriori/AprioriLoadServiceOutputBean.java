@@ -13,4 +13,5 @@ public class AprioriLoadServiceOutputBean {
 	private List<MOrganization> organizationList;
 	private List<ItemSetSupport> itemSetSupportList;
 	private List<AssociationRule> associationRuleList;
+	private String message;
 }
