@@ -10,7 +10,7 @@
 	<tiles:insertAttribute name="body" />
 </body>
 <footer>
-	<script src="${pageContext.request.contextPath}/resources/lib/jquery/dist/jquery.min.js"></script>
-    <script src="${pageContext.request.contextPath}/resources/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+	<script src="${pageContext.request.contextPath}/resources/lib/jquery/dst/jquery.min.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/lib/bootstrap/dst/js/bootstrap.bundle.min.js"></script>
 </footer>
 </html>
