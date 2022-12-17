@@ -1,19 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Repository 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.yanti.inventorycontroll.domain.repository.movingaverage.HMovingAverageRepository">
-  <resultMap id="BaseResultMap" type="com.yanti.inventorycontroll.domain.model.movingaverage.HMovingAverage">
-    <id column="moving_average_id" jdbcType="BIGINT" property="movingAverageId" />
-    <result column="organization_id" jdbcType="BIGINT" property="organizationId" />
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yanti.inventorycontroll.domain.repository.apriorisupportitem.HAprioriSupportItemRepository">
+  <resultMap id="BaseResultMap" type="com.yanti.inventorycontroll.domain.model.apriorisupportitem.HAprioriSupportItem">
+    <id column="apriori_support_item_id" jdbcType="BIGINT" property="aprioriSupportItemId" />
+    <result column="apriori_support_id" jdbcType="BIGINT" property="aprioriSupportId" />
     <result column="item_id" jdbcType="BIGINT" property="itemId" />
-    <result column="quantity" jdbcType="INTEGER" property="quantity" />
-    <result column="year" jdbcType="INTEGER" property="year" />
-    <result column="month" jdbcType="INTEGER" property="month" />
+    <result column="seq" jdbcType="INTEGER" property="seq" />
     <result column="created_by" jdbcType="BIGINT" property="createdBy" />
     <result column="created_date" jdbcType="TIMESTAMP" property="createdDate" />
     <result column="updated_by" jdbcType="BIGINT" property="updatedBy" />
     <result column="updated_date" jdbcType="TIMESTAMP" property="updatedDate" />
   </resultMap>
-  <sql id="Criteria_Where_Clause">
+  <sql id="Example_Where_Clause">
     <where>
       <foreach collection="oredCriteria" item="criteria" separator="or">
         <if test="criteria.valid">
@@ -42,9 +40,9 @@
       </foreach>
     </where>
   </sql>
-  <sql id="Update_By_Criteria_Where_Clause">
+  <sql id="Update_By_Example_Where_Clause">
     <where>
-      <foreach collection="criteria.oredCriteria" item="criteria" separator="or">
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
         <if test="criteria.valid">
           <trim prefix="(" prefixOverrides="and" suffix=")">
             <foreach collection="criteria.criteria" item="criterion">
@@ -72,18 +70,18 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    moving_average_id, organization_id, item_id, quantity, year, month, created_by, created_date, 
+    apriori_support_item_id, apriori_support_id, item_id, seq, created_by, created_date, 
     updated_by, updated_date
   </sql>
-  <select id="selectByCriteria" parameterType="com.yanti.inventorycontroll.domain.model.movingaverage.HMovingAverageCriteria" resultMap="BaseResultMap">
+  <select id="selectByCriteria" parameterType="com.yanti.inventorycontroll.domain.model.apriorisupportitem.HAprioriSupportItemCriteria" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from h_moving_average
+    from h_apriori_support_item
     <if test="_parameter != null">
-      <include refid="Criteria_Where_Clause" />
+      <include refid="Example_Where_Clause" />
     </if>
     <if test="orderByClause != null">
       order by ${orderByClause}
@@ -92,46 +90,38 @@
   <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
-    from h_moving_average
-    where moving_average_id = #{movingAverageId,jdbcType=BIGINT}
+    from h_apriori_support_item
+    where apriori_support_item_id = #{aprioriSupportItemId,jdbcType=BIGINT}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
-    delete from h_moving_average
-    where moving_average_id = #{movingAverageId,jdbcType=BIGINT}
+    delete from h_apriori_support_item
+    where apriori_support_item_id = #{aprioriSupportItemId,jdbcType=BIGINT}
   </delete>
-  <delete id="deleteByCriteria" parameterType="com.yanti.inventorycontroll.domain.model.movingaverage.HMovingAverageCriteria">
-    delete from h_moving_average
+  <delete id="deleteByCriteria" parameterType="com.yanti.inventorycontroll.domain.model.apriorisupportitem.HAprioriSupportItemCriteria">
+    delete from h_apriori_support_item
     <if test="_parameter != null">
-      <include refid="Criteria_Where_Clause" />
+      <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" keyColumn="moving_average_id" keyProperty="movingAverageId" parameterType="com.yanti.inventorycontroll.domain.model.movingaverage.HMovingAverage" useGeneratedKeys="true">
-    insert into h_moving_average (organization_id, item_id, quantity, 
-      year, month, created_by, 
-      created_date, updated_by, updated_date
-      )
-    values (#{organizationId,jdbcType=BIGINT}, #{itemId,jdbcType=BIGINT}, #{quantity,jdbcType=INTEGER}, 
-      #{year,jdbcType=INTEGER}, #{month,jdbcType=INTEGER}, #{createdBy,jdbcType=BIGINT}, 
-      #{createdDate,jdbcType=TIMESTAMP}, #{updatedBy,jdbcType=BIGINT}, #{updatedDate,jdbcType=TIMESTAMP}
-      )
+  <insert id="insert" keyColumn="apriori_support_item_id" keyProperty="aprioriSupportItemId" parameterType="com.yanti.inventorycontroll.domain.model.apriorisupportitem.HAprioriSupportItem" useGeneratedKeys="true">
+    insert into h_apriori_support_item (apriori_support_id, item_id, seq, 
+      created_by, created_date, updated_by, 
+      updated_date)
+    values (#{aprioriSupportId,jdbcType=BIGINT}, #{itemId,jdbcType=BIGINT}, #{seq,jdbcType=INTEGER}, 
+      #{createdBy,jdbcType=BIGINT}, #{createdDate,jdbcType=TIMESTAMP}, #{updatedBy,jdbcType=BIGINT}, 
+      #{updatedDate,jdbcType=TIMESTAMP})
   </insert>
-  <insert id="insertSelective" keyColumn="moving_average_id" keyProperty="movingAverageId" parameterType="com.yanti.inventorycontroll.domain.model.movingaverage.HMovingAverage" useGeneratedKeys="true">
-    insert into h_moving_average
+  <insert id="insertSelective" keyColumn="apriori_support_item_id" keyProperty="aprioriSupportItemId" parameterType="com.yanti.inventorycontroll.domain.model.apriorisupportitem.HAprioriSupportItem" useGeneratedKeys="true">
+    insert into h_apriori_support_item
     <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="organizationId != null">
-        organization_id,
+      <if test="aprioriSupportId != null">
+        apriori_support_id,
       </if>
       <if test="itemId != null">
         item_id,
       </if>
-      <if test="quantity != null">
-        quantity,
-      </if>
-      <if test="year != null">
-        year,
-      </if>
-      <if test="month != null">
-        month,
+      <if test="seq != null">
+        seq,
       </if>
       <if test="createdBy != null">
         created_by,
@@ -147,20 +137,14 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="organizationId != null">
-        #{organizationId,jdbcType=BIGINT},
+      <if test="aprioriSupportId != null">
+        #{aprioriSupportId,jdbcType=BIGINT},
       </if>
       <if test="itemId != null">
         #{itemId,jdbcType=BIGINT},
       </if>
-      <if test="quantity != null">
-        #{quantity,jdbcType=INTEGER},
-      </if>
-      <if test="year != null">
-        #{year,jdbcType=INTEGER},
-      </if>
-      <if test="month != null">
-        #{month,jdbcType=INTEGER},
+      <if test="seq != null">
+        #{seq,jdbcType=INTEGER},
       </if>
       <if test="createdBy != null">
         #{createdBy,jdbcType=BIGINT},
@@ -176,32 +160,26 @@
       </if>
     </trim>
   </insert>
-  <select id="countByCriteria" parameterType="com.yanti.inventorycontroll.domain.model.movingaverage.HMovingAverageCriteria" resultType="java.lang.Long">
-    select count(*) from h_moving_average
+  <select id="countByCriteria" parameterType="com.yanti.inventorycontroll.domain.model.apriorisupportitem.HAprioriSupportItemCriteria" resultType="java.lang.Long">
+    select count(*) from h_apriori_support_item
     <if test="_parameter != null">
-      <include refid="Criteria_Where_Clause" />
+      <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByCriteriaSelective" parameterType="map">
-    update h_moving_average
+    update h_apriori_support_item
     <set>
-      <if test="row.movingAverageId != null">
-        moving_average_id = #{row.movingAverageId,jdbcType=BIGINT},
+      <if test="row.aprioriSupportItemId != null">
+        apriori_support_item_id = #{row.aprioriSupportItemId,jdbcType=BIGINT},
       </if>
-      <if test="row.organizationId != null">
-        organization_id = #{row.organizationId,jdbcType=BIGINT},
+      <if test="row.aprioriSupportId != null">
+        apriori_support_id = #{row.aprioriSupportId,jdbcType=BIGINT},
       </if>
       <if test="row.itemId != null">
         item_id = #{row.itemId,jdbcType=BIGINT},
       </if>
-      <if test="row.quantity != null">
-        quantity = #{row.quantity,jdbcType=INTEGER},
-      </if>
-      <if test="row.year != null">
-        year = #{row.year,jdbcType=INTEGER},
-      </if>
-      <if test="row.month != null">
-        month = #{row.month,jdbcType=INTEGER},
+      <if test="row.seq != null">
+        seq = #{row.seq,jdbcType=INTEGER},
       </if>
       <if test="row.createdBy != null">
         created_by = #{row.createdBy,jdbcType=BIGINT},
@@ -216,43 +194,35 @@
         updated_date = #{row.updatedDate,jdbcType=TIMESTAMP},
       </if>
     </set>
-    <if test="criteria != null">
-      <include refid="Update_By_Criteria_Where_Clause" />
+    <if test="example != null">
+      <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
   <update id="updateByCriteria" parameterType="map">
-    update h_moving_average
-    set moving_average_id = #{row.movingAverageId,jdbcType=BIGINT},
-      organization_id = #{row.organizationId,jdbcType=BIGINT},
+    update h_apriori_support_item
+    set apriori_support_item_id = #{row.aprioriSupportItemId,jdbcType=BIGINT},
+      apriori_support_id = #{row.aprioriSupportId,jdbcType=BIGINT},
       item_id = #{row.itemId,jdbcType=BIGINT},
-      quantity = #{row.quantity,jdbcType=INTEGER},
-      year = #{row.year,jdbcType=INTEGER},
-      month = #{row.month,jdbcType=INTEGER},
+      seq = #{row.seq,jdbcType=INTEGER},
       created_by = #{row.createdBy,jdbcType=BIGINT},
       created_date = #{row.createdDate,jdbcType=TIMESTAMP},
       updated_by = #{row.updatedBy,jdbcType=BIGINT},
       updated_date = #{row.updatedDate,jdbcType=TIMESTAMP}
-    <if test="criteria != null">
-      <include refid="Update_By_Criteria_Where_Clause" />
+    <if test="example != null">
+      <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.yanti.inventorycontroll.domain.model.movingaverage.HMovingAverage">
-    update h_moving_average
+  <update id="updateByPrimaryKeySelective" parameterType="com.yanti.inventorycontroll.domain.model.apriorisupportitem.HAprioriSupportItem">
+    update h_apriori_support_item
     <set>
-      <if test="organizationId != null">
-        organization_id = #{organizationId,jdbcType=BIGINT},
+      <if test="aprioriSupportId != null">
+        apriori_support_id = #{aprioriSupportId,jdbcType=BIGINT},
       </if>
       <if test="itemId != null">
         item_id = #{itemId,jdbcType=BIGINT},
       </if>
-      <if test="quantity != null">
-        quantity = #{quantity,jdbcType=INTEGER},
-      </if>
-      <if test="year != null">
-        year = #{year,jdbcType=INTEGER},
-      </if>
-      <if test="month != null">
-        month = #{month,jdbcType=INTEGER},
+      <if test="seq != null">
+        seq = #{seq,jdbcType=INTEGER},
       </if>
       <if test="createdBy != null">
         created_by = #{createdBy,jdbcType=BIGINT},
@@ -267,19 +237,17 @@
         updated_date = #{updatedDate,jdbcType=TIMESTAMP},
       </if>
     </set>
-    where moving_average_id = #{movingAverageId,jdbcType=BIGINT}
+    where apriori_support_item_id = #{aprioriSupportItemId,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.yanti.inventorycontroll.domain.model.movingaverage.HMovingAverage">
-    update h_moving_average
-    set organization_id = #{organizationId,jdbcType=BIGINT},
+  <update id="updateByPrimaryKey" parameterType="com.yanti.inventorycontroll.domain.model.apriorisupportitem.HAprioriSupportItem">
+    update h_apriori_support_item
+    set apriori_support_id = #{aprioriSupportId,jdbcType=BIGINT},
       item_id = #{itemId,jdbcType=BIGINT},
-      quantity = #{quantity,jdbcType=INTEGER},
-      year = #{year,jdbcType=INTEGER},
-      month = #{month,jdbcType=INTEGER},
+      seq = #{seq,jdbcType=INTEGER},
       created_by = #{createdBy,jdbcType=BIGINT},
       created_date = #{createdDate,jdbcType=TIMESTAMP},
       updated_by = #{updatedBy,jdbcType=BIGINT},
       updated_date = #{updatedDate,jdbcType=TIMESTAMP}
-    where moving_average_id = #{movingAverageId,jdbcType=BIGINT}
+    where apriori_support_item_id = #{aprioriSupportItemId,jdbcType=BIGINT}
   </update>
 </mapper>

@@ -250,4 +250,22 @@
       updated_date = #{updatedDate,jdbcType=TIMESTAMP}
     where request_item_id = #{requestItemId,jdbcType=BIGINT}
   </update>
+  
+  <resultMap id="transactionItemMap" type="com.yanti.inventorycontroll.domain.dto.apriori.ItemTransaction">
+    <id column="request_id" property="requestId" />
+    <collection property="items" javaType="ArrayList" ofType="Long">
+    	<result column="item_id" />
+    </collection>
+  </resultMap>
+  <select id="selectAllItemTransaction" resultMap="transactionItemMap">
+  	select 
+		r.request_id,
+		i.item_id
+	from t_request r
+		join t_request_item ri on ri.request_id = r.request_id
+		join m_item i on i.item_id = ri.item_id
+		join m_user u on u.user_id = r.user_id
+	where u.organization_id = #{organizationId}
+	order by r.created_date, ri.created_date
+  </select>
 </mapper>

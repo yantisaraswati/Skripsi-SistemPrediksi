@@ -225,323 +225,123 @@ public class HAprioriCriteria {
             return (Criteria) this;
         }
 
-        public Criteria andLabelIsNull() {
-            addCriterion("label is null");
+        public Criteria andMinSupportIsNull() {
+            addCriterion("min_support is null");
             return (Criteria) this;
         }
 
-        public Criteria andLabelIsNotNull() {
-            addCriterion("label is not null");
+        public Criteria andMinSupportIsNotNull() {
+            addCriterion("min_support is not null");
             return (Criteria) this;
         }
 
-        public Criteria andLabelEqualTo(String value) {
-            addCriterion("label =", value, "label");
+        public Criteria andMinSupportEqualTo(Integer value) {
+            addCriterion("min_support =", value, "minSupport");
             return (Criteria) this;
         }
 
-        public Criteria andLabelNotEqualTo(String value) {
-            addCriterion("label <>", value, "label");
+        public Criteria andMinSupportNotEqualTo(Integer value) {
+            addCriterion("min_support <>", value, "minSupport");
             return (Criteria) this;
         }
 
-        public Criteria andLabelGreaterThan(String value) {
-            addCriterion("label >", value, "label");
+        public Criteria andMinSupportGreaterThan(Integer value) {
+            addCriterion("min_support >", value, "minSupport");
             return (Criteria) this;
         }
 
-        public Criteria andLabelGreaterThanOrEqualTo(String value) {
-            addCriterion("label >=", value, "label");
+        public Criteria andMinSupportGreaterThanOrEqualTo(Integer value) {
+            addCriterion("min_support >=", value, "minSupport");
             return (Criteria) this;
         }
 
-        public Criteria andLabelLessThan(String value) {
-            addCriterion("label <", value, "label");
+        public Criteria andMinSupportLessThan(Integer value) {
+            addCriterion("min_support <", value, "minSupport");
             return (Criteria) this;
         }
 
-        public Criteria andLabelLessThanOrEqualTo(String value) {
-            addCriterion("label <=", value, "label");
+        public Criteria andMinSupportLessThanOrEqualTo(Integer value) {
+            addCriterion("min_support <=", value, "minSupport");
             return (Criteria) this;
         }
 
-        public Criteria andLabelLike(String value) {
-            addCriterion("label like", value, "label");
+        public Criteria andMinSupportIn(List<Integer> values) {
+            addCriterion("min_support in", values, "minSupport");
             return (Criteria) this;
         }
 
-        public Criteria andLabelNotLike(String value) {
-            addCriterion("label not like", value, "label");
+        public Criteria andMinSupportNotIn(List<Integer> values) {
+            addCriterion("min_support not in", values, "minSupport");
             return (Criteria) this;
         }
 
-        public Criteria andLabelIn(List<String> values) {
-            addCriterion("label in", values, "label");
+        public Criteria andMinSupportBetween(Integer value1, Integer value2) {
+            addCriterion("min_support between", value1, value2, "minSupport");
             return (Criteria) this;
         }
 
-        public Criteria andLabelNotIn(List<String> values) {
-            addCriterion("label not in", values, "label");
+        public Criteria andMinSupportNotBetween(Integer value1, Integer value2) {
+            addCriterion("min_support not between", value1, value2, "minSupport");
             return (Criteria) this;
         }
 
-        public Criteria andLabelBetween(String value1, String value2) {
-            addCriterion("label between", value1, value2, "label");
+        public Criteria andMinConfidenceIsNull() {
+            addCriterion("min_confidence is null");
             return (Criteria) this;
         }
 
-        public Criteria andLabelNotBetween(String value1, String value2) {
-            addCriterion("label not between", value1, value2, "label");
+        public Criteria andMinConfidenceIsNotNull() {
+            addCriterion("min_confidence is not null");
             return (Criteria) this;
         }
 
-        public Criteria andSupportIsNull() {
-            addCriterion("support is null");
+        public Criteria andMinConfidenceEqualTo(Integer value) {
+            addCriterion("min_confidence =", value, "minConfidence");
             return (Criteria) this;
         }
 
-        public Criteria andSupportIsNotNull() {
-            addCriterion("support is not null");
+        public Criteria andMinConfidenceNotEqualTo(Integer value) {
+            addCriterion("min_confidence <>", value, "minConfidence");
             return (Criteria) this;
         }
 
-        public Criteria andSupportEqualTo(Integer value) {
-            addCriterion("support =", value, "support");
+        public Criteria andMinConfidenceGreaterThan(Integer value) {
+            addCriterion("min_confidence >", value, "minConfidence");
             return (Criteria) this;
         }
 
-        public Criteria andSupportNotEqualTo(Integer value) {
-            addCriterion("support <>", value, "support");
+        public Criteria andMinConfidenceGreaterThanOrEqualTo(Integer value) {
+            addCriterion("min_confidence >=", value, "minConfidence");
             return (Criteria) this;
         }
 
-        public Criteria andSupportGreaterThan(Integer value) {
-            addCriterion("support >", value, "support");
+        public Criteria andMinConfidenceLessThan(Integer value) {
+            addCriterion("min_confidence <", value, "minConfidence");
             return (Criteria) this;
         }
 
-        public Criteria andSupportGreaterThanOrEqualTo(Integer value) {
-            addCriterion("support >=", value, "support");
+        public Criteria andMinConfidenceLessThanOrEqualTo(Integer value) {
+            addCriterion("min_confidence <=", value, "minConfidence");
             return (Criteria) this;
         }
 
-        public Criteria andSupportLessThan(Integer value) {
-            addCriterion("support <", value, "support");
+        public Criteria andMinConfidenceIn(List<Integer> values) {
+            addCriterion("min_confidence in", values, "minConfidence");
             return (Criteria) this;
         }
 
-        public Criteria andSupportLessThanOrEqualTo(Integer value) {
-            addCriterion("support <=", value, "support");
+        public Criteria andMinConfidenceNotIn(List<Integer> values) {
+            addCriterion("min_confidence not in", values, "minConfidence");
             return (Criteria) this;
         }
 
-        public Criteria andSupportIn(List<Integer> values) {
-            addCriterion("support in", values, "support");
+        public Criteria andMinConfidenceBetween(Integer value1, Integer value2) {
+            addCriterion("min_confidence between", value1, value2, "minConfidence");
             return (Criteria) this;
         }
 
-        public Criteria andSupportNotIn(List<Integer> values) {
-            addCriterion("support not in", values, "support");
-            return (Criteria) this;
-        }
-
-        public Criteria andSupportBetween(Integer value1, Integer value2) {
-            addCriterion("support between", value1, value2, "support");
-            return (Criteria) this;
-        }
-
-        public Criteria andSupportNotBetween(Integer value1, Integer value2) {
-            addCriterion("support not between", value1, value2, "support");
-            return (Criteria) this;
-        }
-
-        public Criteria andSupportAubIsNull() {
-            addCriterion("support_aub is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andSupportAubIsNotNull() {
-            addCriterion("support_aub is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andSupportAubEqualTo(Integer value) {
-            addCriterion("support_aub =", value, "supportAub");
-            return (Criteria) this;
-        }
-
-        public Criteria andSupportAubNotEqualTo(Integer value) {
-            addCriterion("support_aub <>", value, "supportAub");
-            return (Criteria) this;
-        }
-
-        public Criteria andSupportAubGreaterThan(Integer value) {
-            addCriterion("support_aub >", value, "supportAub");
-            return (Criteria) this;
-        }
-
-        public Criteria andSupportAubGreaterThanOrEqualTo(Integer value) {
-            addCriterion("support_aub >=", value, "supportAub");
-            return (Criteria) this;
-        }
-
-        public Criteria andSupportAubLessThan(Integer value) {
-            addCriterion("support_aub <", value, "supportAub");
-            return (Criteria) this;
-        }
-
-        public Criteria andSupportAubLessThanOrEqualTo(Integer value) {
-            addCriterion("support_aub <=", value, "supportAub");
-            return (Criteria) this;
-        }
-
-        public Criteria andSupportAubIn(List<Integer> values) {
-            addCriterion("support_aub in", values, "supportAub");
-            return (Criteria) this;
-        }
-
-        public Criteria andSupportAubNotIn(List<Integer> values) {
-            addCriterion("support_aub not in", values, "supportAub");
-            return (Criteria) this;
-        }
-
-        public Criteria andSupportAubBetween(Integer value1, Integer value2) {
-            addCriterion("support_aub between", value1, value2, "supportAub");
-            return (Criteria) this;
-        }
-
-        public Criteria andSupportAubNotBetween(Integer value1, Integer value2) {
-            addCriterion("support_aub not between", value1, value2, "supportAub");
-            return (Criteria) this;
-        }
-
-        public Criteria andConfidenceIsNull() {
-            addCriterion("confidence is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andConfidenceIsNotNull() {
-            addCriterion("confidence is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andConfidenceEqualTo(Integer value) {
-            addCriterion("confidence =", value, "confidence");
-            return (Criteria) this;
-        }
-
-        public Criteria andConfidenceNotEqualTo(Integer value) {
-            addCriterion("confidence <>", value, "confidence");
-            return (Criteria) this;
-        }
-
-        public Criteria andConfidenceGreaterThan(Integer value) {
-            addCriterion("confidence >", value, "confidence");
-            return (Criteria) this;
-        }
-
-        public Criteria andConfidenceGreaterThanOrEqualTo(Integer value) {
-            addCriterion("confidence >=", value, "confidence");
-            return (Criteria) this;
-        }
-
-        public Criteria andConfidenceLessThan(Integer value) {
-            addCriterion("confidence <", value, "confidence");
-            return (Criteria) this;
-        }
-
-        public Criteria andConfidenceLessThanOrEqualTo(Integer value) {
-            addCriterion("confidence <=", value, "confidence");
-            return (Criteria) this;
-        }
-
-        public Criteria andConfidenceIn(List<Integer> values) {
-            addCriterion("confidence in", values, "confidence");
-            return (Criteria) this;
-        }
-
-        public Criteria andConfidenceNotIn(List<Integer> values) {
-            addCriterion("confidence not in", values, "confidence");
-            return (Criteria) this;
-        }
-
-        public Criteria andConfidenceBetween(Integer value1, Integer value2) {
-            addCriterion("confidence between", value1, value2, "confidence");
-            return (Criteria) this;
-        }
-
-        public Criteria andConfidenceNotBetween(Integer value1, Integer value2) {
-            addCriterion("confidence not between", value1, value2, "confidence");
-            return (Criteria) this;
-        }
-
-        public Criteria andRulesIsNull() {
-            addCriterion("rules is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andRulesIsNotNull() {
-            addCriterion("rules is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andRulesEqualTo(String value) {
-            addCriterion("rules =", value, "rules");
-            return (Criteria) this;
-        }
-
-        public Criteria andRulesNotEqualTo(String value) {
-            addCriterion("rules <>", value, "rules");
-            return (Criteria) this;
-        }
-
-        public Criteria andRulesGreaterThan(String value) {
-            addCriterion("rules >", value, "rules");
-            return (Criteria) this;
-        }
-
-        public Criteria andRulesGreaterThanOrEqualTo(String value) {
-            addCriterion("rules >=", value, "rules");
-            return (Criteria) this;
-        }
-
-        public Criteria andRulesLessThan(String value) {
-            addCriterion("rules <", value, "rules");
-            return (Criteria) this;
-        }
-
-        public Criteria andRulesLessThanOrEqualTo(String value) {
-            addCriterion("rules <=", value, "rules");
-            return (Criteria) this;
-        }
-
-        public Criteria andRulesLike(String value) {
-            addCriterion("rules like", value, "rules");
-            return (Criteria) this;
-        }
-
-        public Criteria andRulesNotLike(String value) {
-            addCriterion("rules not like", value, "rules");
-            return (Criteria) this;
-        }
-
-        public Criteria andRulesIn(List<String> values) {
-            addCriterion("rules in", values, "rules");
-            return (Criteria) this;
-        }
-
-        public Criteria andRulesNotIn(List<String> values) {
-            addCriterion("rules not in", values, "rules");
-            return (Criteria) this;
-        }
-
-        public Criteria andRulesBetween(String value1, String value2) {
-            addCriterion("rules between", value1, value2, "rules");
-            return (Criteria) this;
-        }
-
-        public Criteria andRulesNotBetween(String value1, String value2) {
-            addCriterion("rules not between", value1, value2, "rules");
+        public Criteria andMinConfidenceNotBetween(Integer value1, Integer value2) {
+            addCriterion("min_confidence not between", value1, value2, "minConfidence");
             return (Criteria) this;
         }
 

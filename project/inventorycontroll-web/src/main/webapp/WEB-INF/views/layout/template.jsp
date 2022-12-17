@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/app/css/main.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- <link rel="stylesheet" href="http//code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css"> -->
     <script src="${pageContext.request.contextPath}/resources/lib/jquery/dist/jquery-3.6.0.min.js"></script>
     
 	<script type="text/javascript">

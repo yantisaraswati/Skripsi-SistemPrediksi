@@ -20,9 +20,9 @@ public interface HAprioriRepository {
 
     HApriori selectByPrimaryKey(Long aprioriId);
 
-    int updateByCriteriaSelective(@Param("row") HApriori row, @Param("criteria") HAprioriCriteria criteria);
+    int updateByCriteriaSelective(@Param("row") HApriori row, @Param("example") HAprioriCriteria criteria);
 
-    int updateByCriteria(@Param("row") HApriori row, @Param("criteria") HAprioriCriteria criteria);
+    int updateByCriteria(@Param("row") HApriori row, @Param("example") HAprioriCriteria criteria);
 
     int updateByPrimaryKeySelective(HApriori row);
 

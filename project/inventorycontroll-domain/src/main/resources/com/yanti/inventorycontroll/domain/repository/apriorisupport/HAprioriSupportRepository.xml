@@ -1,16 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Repository 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.yanti.inventorycontroll.domain.repository.aprioriitem.HAprioriItemRepository">
-  <resultMap id="BaseResultMap" type="com.yanti.inventorycontroll.domain.model.aprioriitem.HAprioriItem">
-    <id column="apriori_item_id" jdbcType="BIGINT" property="aprioriItemId" />
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yanti.inventorycontroll.domain.repository.apriorisupport.HAprioriSupportRepository">
+  <resultMap id="BaseResultMap" type="com.yanti.inventorycontroll.domain.model.apriorisupport.HAprioriSupport">
+    <id column="apriori_support_id" jdbcType="BIGINT" property="aprioriSupportId" />
     <result column="apriori_id" jdbcType="BIGINT" property="aprioriId" />
-    <result column="item_id" jdbcType="BIGINT" property="itemId" />
+    <result column="k_item" jdbcType="INTEGER" property="kItem" />
+    <result column="support" jdbcType="INTEGER" property="support" />
     <result column="created_by" jdbcType="BIGINT" property="createdBy" />
     <result column="created_date" jdbcType="TIMESTAMP" property="createdDate" />
     <result column="updated_by" jdbcType="BIGINT" property="updatedBy" />
     <result column="updated_date" jdbcType="TIMESTAMP" property="updatedDate" />
   </resultMap>
-  <sql id="Criteria_Where_Clause">
+  <sql id="Example_Where_Clause">
     <where>
       <foreach collection="oredCriteria" item="criteria" separator="or">
         <if test="criteria.valid">
@@ -39,9 +40,9 @@
       </foreach>
     </where>
   </sql>
-  <sql id="Update_By_Criteria_Where_Clause">
+  <sql id="Update_By_Example_Where_Clause">
     <where>
-      <foreach collection="criteria.oredCriteria" item="criteria" separator="or">
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
         <if test="criteria.valid">
           <trim prefix="(" prefixOverrides="and" suffix=")">
             <foreach collection="criteria.criteria" item="criterion">
@@ -69,17 +70,18 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    apriori_item_id, apriori_id, item_id, created_by, created_date, updated_by, updated_date
+    apriori_support_id, apriori_id, k_item, support, created_by, created_date, updated_by, 
+    updated_date
   </sql>
-  <select id="selectByCriteria" parameterType="com.yanti.inventorycontroll.domain.model.aprioriitem.HAprioriItemCriteria" resultMap="BaseResultMap">
+  <select id="selectByCriteria" parameterType="com.yanti.inventorycontroll.domain.model.apriorisupport.HAprioriSupportCriteria" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from h_apriori_item
+    from h_apriori_support
     <if test="_parameter != null">
-      <include refid="Criteria_Where_Clause" />
+      <include refid="Example_Where_Clause" />
     </if>
     <if test="orderByClause != null">
       order by ${orderByClause}
@@ -88,35 +90,38 @@
   <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
-    from h_apriori_item
-    where apriori_item_id = #{aprioriItemId,jdbcType=BIGINT}
+    from h_apriori_support
+    where apriori_support_id = #{aprioriSupportId,jdbcType=BIGINT}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
-    delete from h_apriori_item
-    where apriori_item_id = #{aprioriItemId,jdbcType=BIGINT}
+    delete from h_apriori_support
+    where apriori_support_id = #{aprioriSupportId,jdbcType=BIGINT}
   </delete>
-  <delete id="deleteByCriteria" parameterType="com.yanti.inventorycontroll.domain.model.aprioriitem.HAprioriItemCriteria">
-    delete from h_apriori_item
+  <delete id="deleteByCriteria" parameterType="com.yanti.inventorycontroll.domain.model.apriorisupport.HAprioriSupportCriteria">
+    delete from h_apriori_support
     <if test="_parameter != null">
-      <include refid="Criteria_Where_Clause" />
+      <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" keyColumn="apriori_item_id" keyProperty="aprioriItemId" parameterType="com.yanti.inventorycontroll.domain.model.aprioriitem.HAprioriItem" useGeneratedKeys="true">
-    insert into h_apriori_item (apriori_id, item_id, created_by, 
-      created_date, updated_by, updated_date
-      )
-    values (#{aprioriId,jdbcType=BIGINT}, #{itemId,jdbcType=BIGINT}, #{createdBy,jdbcType=BIGINT}, 
-      #{createdDate,jdbcType=TIMESTAMP}, #{updatedBy,jdbcType=BIGINT}, #{updatedDate,jdbcType=TIMESTAMP}
-      )
+  <insert id="insert" keyColumn="apriori_support_id" keyProperty="aprioriSupportId" parameterType="com.yanti.inventorycontroll.domain.model.apriorisupport.HAprioriSupport" useGeneratedKeys="true">
+    insert into h_apriori_support (apriori_id, k_item, support, 
+      created_by, created_date, updated_by, 
+      updated_date)
+    values (#{aprioriId,jdbcType=BIGINT}, #{kItem,jdbcType=INTEGER}, #{support,jdbcType=INTEGER}, 
+      #{createdBy,jdbcType=BIGINT}, #{createdDate,jdbcType=TIMESTAMP}, #{updatedBy,jdbcType=BIGINT}, 
+      #{updatedDate,jdbcType=TIMESTAMP})
   </insert>
-  <insert id="insertSelective" keyColumn="apriori_item_id" keyProperty="aprioriItemId" parameterType="com.yanti.inventorycontroll.domain.model.aprioriitem.HAprioriItem" useGeneratedKeys="true">
-    insert into h_apriori_item
+  <insert id="insertSelective" keyColumn="apriori_support_id" keyProperty="aprioriSupportId" parameterType="com.yanti.inventorycontroll.domain.model.apriorisupport.HAprioriSupport" useGeneratedKeys="true">
+    insert into h_apriori_support
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="aprioriId != null">
         apriori_id,
       </if>
-      <if test="itemId != null">
-        item_id,
+      <if test="kItem != null">
+        k_item,
+      </if>
+      <if test="support != null">
+        support,
       </if>
       <if test="createdBy != null">
         created_by,
@@ -135,8 +140,11 @@
       <if test="aprioriId != null">
         #{aprioriId,jdbcType=BIGINT},
       </if>
-      <if test="itemId != null">
-        #{itemId,jdbcType=BIGINT},
+      <if test="kItem != null">
+        #{kItem,jdbcType=INTEGER},
+      </if>
+      <if test="support != null">
+        #{support,jdbcType=INTEGER},
       </if>
       <if test="createdBy != null">
         #{createdBy,jdbcType=BIGINT},
@@ -152,23 +160,26 @@
       </if>
     </trim>
   </insert>
-  <select id="countByCriteria" parameterType="com.yanti.inventorycontroll.domain.model.aprioriitem.HAprioriItemCriteria" resultType="java.lang.Long">
-    select count(*) from h_apriori_item
+  <select id="countByCriteria" parameterType="com.yanti.inventorycontroll.domain.model.apriorisupport.HAprioriSupportCriteria" resultType="java.lang.Long">
+    select count(*) from h_apriori_support
     <if test="_parameter != null">
-      <include refid="Criteria_Where_Clause" />
+      <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByCriteriaSelective" parameterType="map">
-    update h_apriori_item
+    update h_apriori_support
     <set>
-      <if test="row.aprioriItemId != null">
-        apriori_item_id = #{row.aprioriItemId,jdbcType=BIGINT},
+      <if test="row.aprioriSupportId != null">
+        apriori_support_id = #{row.aprioriSupportId,jdbcType=BIGINT},
       </if>
       <if test="row.aprioriId != null">
         apriori_id = #{row.aprioriId,jdbcType=BIGINT},
       </if>
-      <if test="row.itemId != null">
-        item_id = #{row.itemId,jdbcType=BIGINT},
+      <if test="row.kItem != null">
+        k_item = #{row.kItem,jdbcType=INTEGER},
+      </if>
+      <if test="row.support != null">
+        support = #{row.support,jdbcType=INTEGER},
       </if>
       <if test="row.createdBy != null">
         created_by = #{row.createdBy,jdbcType=BIGINT},
@@ -183,31 +194,35 @@
         updated_date = #{row.updatedDate,jdbcType=TIMESTAMP},
       </if>
     </set>
-    <if test="criteria != null">
-      <include refid="Update_By_Criteria_Where_Clause" />
+    <if test="example != null">
+      <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
   <update id="updateByCriteria" parameterType="map">
-    update h_apriori_item
-    set apriori_item_id = #{row.aprioriItemId,jdbcType=BIGINT},
+    update h_apriori_support
+    set apriori_support_id = #{row.aprioriSupportId,jdbcType=BIGINT},
       apriori_id = #{row.aprioriId,jdbcType=BIGINT},
-      item_id = #{row.itemId,jdbcType=BIGINT},
+      k_item = #{row.kItem,jdbcType=INTEGER},
+      support = #{row.support,jdbcType=INTEGER},
       created_by = #{row.createdBy,jdbcType=BIGINT},
       created_date = #{row.createdDate,jdbcType=TIMESTAMP},
       updated_by = #{row.updatedBy,jdbcType=BIGINT},
       updated_date = #{row.updatedDate,jdbcType=TIMESTAMP}
-    <if test="criteria != null">
-      <include refid="Update_By_Criteria_Where_Clause" />
+    <if test="example != null">
+      <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.yanti.inventorycontroll.domain.model.aprioriitem.HAprioriItem">
-    update h_apriori_item
+  <update id="updateByPrimaryKeySelective" parameterType="com.yanti.inventorycontroll.domain.model.apriorisupport.HAprioriSupport">
+    update h_apriori_support
     <set>
       <if test="aprioriId != null">
         apriori_id = #{aprioriId,jdbcType=BIGINT},
       </if>
-      <if test="itemId != null">
-        item_id = #{itemId,jdbcType=BIGINT},
+      <if test="kItem != null">
+        k_item = #{kItem,jdbcType=INTEGER},
+      </if>
+      <if test="support != null">
+        support = #{support,jdbcType=INTEGER},
       </if>
       <if test="createdBy != null">
         created_by = #{createdBy,jdbcType=BIGINT},
@@ -222,16 +237,17 @@
         updated_date = #{updatedDate,jdbcType=TIMESTAMP},
       </if>
     </set>
-    where apriori_item_id = #{aprioriItemId,jdbcType=BIGINT}
+    where apriori_support_id = #{aprioriSupportId,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.yanti.inventorycontroll.domain.model.aprioriitem.HAprioriItem">
-    update h_apriori_item
+  <update id="updateByPrimaryKey" parameterType="com.yanti.inventorycontroll.domain.model.apriorisupport.HAprioriSupport">
+    update h_apriori_support
     set apriori_id = #{aprioriId,jdbcType=BIGINT},
-      item_id = #{itemId,jdbcType=BIGINT},
+      k_item = #{kItem,jdbcType=INTEGER},
+      support = #{support,jdbcType=INTEGER},
       created_by = #{createdBy,jdbcType=BIGINT},
       created_date = #{createdDate,jdbcType=TIMESTAMP},
       updated_by = #{updatedBy,jdbcType=BIGINT},
       updated_date = #{updatedDate,jdbcType=TIMESTAMP}
-    where apriori_item_id = #{aprioriItemId,jdbcType=BIGINT}
+    where apriori_support_id = #{aprioriSupportId,jdbcType=BIGINT}
   </update>
 </mapper>

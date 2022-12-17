@@ -1,17 +1,17 @@
-package com.yanti.inventorycontroll.domain.model.aprioriitem;
+package com.yanti.inventorycontroll.domain.model.apriorisupport;
 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class HAprioriItemCriteria {
+public class HAprioriSupportCriteria {
     protected String orderByClause;
 
     protected boolean distinct;
 
     protected List<Criteria> oredCriteria;
 
-    public HAprioriItemCriteria() {
+    public HAprioriSupportCriteria() {
         oredCriteria = new ArrayList<>();
     }
 
@@ -105,63 +105,63 @@ public class HAprioriItemCriteria {
             criteria.add(new Criterion(condition, value1, value2));
         }
 
-        public Criteria andAprioriItemIdIsNull() {
-            addCriterion("apriori_item_id is null");
+        public Criteria andAprioriSupportIdIsNull() {
+            addCriterion("apriori_support_id is null");
             return (Criteria) this;
         }
 
-        public Criteria andAprioriItemIdIsNotNull() {
-            addCriterion("apriori_item_id is not null");
+        public Criteria andAprioriSupportIdIsNotNull() {
+            addCriterion("apriori_support_id is not null");
             return (Criteria) this;
         }
 
-        public Criteria andAprioriItemIdEqualTo(Long value) {
-            addCriterion("apriori_item_id =", value, "aprioriItemId");
+        public Criteria andAprioriSupportIdEqualTo(Long value) {
+            addCriterion("apriori_support_id =", value, "aprioriSupportId");
             return (Criteria) this;
         }
 
-        public Criteria andAprioriItemIdNotEqualTo(Long value) {
-            addCriterion("apriori_item_id <>", value, "aprioriItemId");
+        public Criteria andAprioriSupportIdNotEqualTo(Long value) {
+            addCriterion("apriori_support_id <>", value, "aprioriSupportId");
             return (Criteria) this;
         }
 
-        public Criteria andAprioriItemIdGreaterThan(Long value) {
-            addCriterion("apriori_item_id >", value, "aprioriItemId");
+        public Criteria andAprioriSupportIdGreaterThan(Long value) {
+            addCriterion("apriori_support_id >", value, "aprioriSupportId");
             return (Criteria) this;
         }
 
-        public Criteria andAprioriItemIdGreaterThanOrEqualTo(Long value) {
-            addCriterion("apriori_item_id >=", value, "aprioriItemId");
+        public Criteria andAprioriSupportIdGreaterThanOrEqualTo(Long value) {
+            addCriterion("apriori_support_id >=", value, "aprioriSupportId");
             return (Criteria) this;
         }
 
-        public Criteria andAprioriItemIdLessThan(Long value) {
-            addCriterion("apriori_item_id <", value, "aprioriItemId");
+        public Criteria andAprioriSupportIdLessThan(Long value) {
+            addCriterion("apriori_support_id <", value, "aprioriSupportId");
             return (Criteria) this;
         }
 
-        public Criteria andAprioriItemIdLessThanOrEqualTo(Long value) {
-            addCriterion("apriori_item_id <=", value, "aprioriItemId");
+        public Criteria andAprioriSupportIdLessThanOrEqualTo(Long value) {
+            addCriterion("apriori_support_id <=", value, "aprioriSupportId");
             return (Criteria) this;
         }
 
-        public Criteria andAprioriItemIdIn(List<Long> values) {
-            addCriterion("apriori_item_id in", values, "aprioriItemId");
+        public Criteria andAprioriSupportIdIn(List<Long> values) {
+            addCriterion("apriori_support_id in", values, "aprioriSupportId");
             return (Criteria) this;
         }
 
-        public Criteria andAprioriItemIdNotIn(List<Long> values) {
-            addCriterion("apriori_item_id not in", values, "aprioriItemId");
+        public Criteria andAprioriSupportIdNotIn(List<Long> values) {
+            addCriterion("apriori_support_id not in", values, "aprioriSupportId");
             return (Criteria) this;
         }
 
-        public Criteria andAprioriItemIdBetween(Long value1, Long value2) {
-            addCriterion("apriori_item_id between", value1, value2, "aprioriItemId");
+        public Criteria andAprioriSupportIdBetween(Long value1, Long value2) {
+            addCriterion("apriori_support_id between", value1, value2, "aprioriSupportId");
             return (Criteria) this;
         }
 
-        public Criteria andAprioriItemIdNotBetween(Long value1, Long value2) {
-            addCriterion("apriori_item_id not between", value1, value2, "aprioriItemId");
+        public Criteria andAprioriSupportIdNotBetween(Long value1, Long value2) {
+            addCriterion("apriori_support_id not between", value1, value2, "aprioriSupportId");
             return (Criteria) this;
         }
 
@@ -225,63 +225,123 @@ public class HAprioriItemCriteria {
             return (Criteria) this;
         }
 
-        public Criteria andItemIdIsNull() {
-            addCriterion("item_id is null");
+        public Criteria andKItemIsNull() {
+            addCriterion("k_item is null");
             return (Criteria) this;
         }
 
-        public Criteria andItemIdIsNotNull() {
-            addCriterion("item_id is not null");
+        public Criteria andKItemIsNotNull() {
+            addCriterion("k_item is not null");
             return (Criteria) this;
         }
 
-        public Criteria andItemIdEqualTo(Long value) {
-            addCriterion("item_id =", value, "itemId");
+        public Criteria andKItemEqualTo(Integer value) {
+            addCriterion("k_item =", value, "kItem");
             return (Criteria) this;
         }
 
-        public Criteria andItemIdNotEqualTo(Long value) {
-            addCriterion("item_id <>", value, "itemId");
+        public Criteria andKItemNotEqualTo(Integer value) {
+            addCriterion("k_item <>", value, "kItem");
             return (Criteria) this;
         }
 
-        public Criteria andItemIdGreaterThan(Long value) {
-            addCriterion("item_id >", value, "itemId");
+        public Criteria andKItemGreaterThan(Integer value) {
+            addCriterion("k_item >", value, "kItem");
             return (Criteria) this;
         }
 
-        public Criteria andItemIdGreaterThanOrEqualTo(Long value) {
-            addCriterion("item_id >=", value, "itemId");
+        public Criteria andKItemGreaterThanOrEqualTo(Integer value) {
+            addCriterion("k_item >=", value, "kItem");
             return (Criteria) this;
         }
 
-        public Criteria andItemIdLessThan(Long value) {
-            addCriterion("item_id <", value, "itemId");
+        public Criteria andKItemLessThan(Integer value) {
+            addCriterion("k_item <", value, "kItem");
             return (Criteria) this;
         }
 
-        public Criteria andItemIdLessThanOrEqualTo(Long value) {
-            addCriterion("item_id <=", value, "itemId");
+        public Criteria andKItemLessThanOrEqualTo(Integer value) {
+            addCriterion("k_item <=", value, "kItem");
             return (Criteria) this;
         }
 
-        public Criteria andItemIdIn(List<Long> values) {
-            addCriterion("item_id in", values, "itemId");
+        public Criteria andKItemIn(List<Integer> values) {
+            addCriterion("k_item in", values, "kItem");
             return (Criteria) this;
         }
 
-        public Criteria andItemIdNotIn(List<Long> values) {
-            addCriterion("item_id not in", values, "itemId");
+        public Criteria andKItemNotIn(List<Integer> values) {
+            addCriterion("k_item not in", values, "kItem");
             return (Criteria) this;
         }
 
-        public Criteria andItemIdBetween(Long value1, Long value2) {
-            addCriterion("item_id between", value1, value2, "itemId");
+        public Criteria andKItemBetween(Integer value1, Integer value2) {
+            addCriterion("k_item between", value1, value2, "kItem");
             return (Criteria) this;
         }
 
-        public Criteria andItemIdNotBetween(Long value1, Long value2) {
-            addCriterion("item_id not between", value1, value2, "itemId");
+        public Criteria andKItemNotBetween(Integer value1, Integer value2) {
+            addCriterion("k_item not between", value1, value2, "kItem");
+            return (Criteria) this;
+        }
+
+        public Criteria andSupportIsNull() {
+            addCriterion("support is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andSupportIsNotNull() {
+            addCriterion("support is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andSupportEqualTo(Integer value) {
+            addCriterion("support =", value, "support");
+            return (Criteria) this;
+        }
+
+        public Criteria andSupportNotEqualTo(Integer value) {
+            addCriterion("support <>", value, "support");
+            return (Criteria) this;
+        }
+
+        public Criteria andSupportGreaterThan(Integer value) {
+            addCriterion("support >", value, "support");
+            return (Criteria) this;
+        }
+
+        public Criteria andSupportGreaterThanOrEqualTo(Integer value) {
+            addCriterion("support >=", value, "support");
+            return (Criteria) this;
+        }
+
+        public Criteria andSupportLessThan(Integer value) {
+            addCriterion("support <", value, "support");
+            return (Criteria) this;
+        }
+
+        public Criteria andSupportLessThanOrEqualTo(Integer value) {
+            addCriterion("support <=", value, "support");
+            return (Criteria) this;
+        }
+
+        public Criteria andSupportIn(List<Integer> values) {
+            addCriterion("support in", values, "support");
+            return (Criteria) this;
+        }
+
+        public Criteria andSupportNotIn(List<Integer> values) {
+            addCriterion("support not in", values, "support");
+            return (Criteria) this;
+        }
+
+        public Criteria andSupportBetween(Integer value1, Integer value2) {
+            addCriterion("support between", value1, value2, "support");
+            return (Criteria) this;
+        }
+
+        public Criteria andSupportNotBetween(Integer value1, Integer value2) {
+            addCriterion("support not between", value1, value2, "support");
             return (Criteria) this;
         }
 

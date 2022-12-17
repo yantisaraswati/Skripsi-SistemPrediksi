@@ -1,17 +1,17 @@
-package com.yanti.inventorycontroll.domain.model.movingaverage;
+package com.yanti.inventorycontroll.domain.model.apriorisupportitem;
 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class HMovingAverageCriteria {
+public class HAprioriSupportItemCriteria {
     protected String orderByClause;
 
     protected boolean distinct;
 
     protected List<Criteria> oredCriteria;
 
-    public HMovingAverageCriteria() {
+    public HAprioriSupportItemCriteria() {
         oredCriteria = new ArrayList<>();
     }
 
@@ -105,123 +105,123 @@ public class HMovingAverageCriteria {
             criteria.add(new Criterion(condition, value1, value2));
         }
 
-        public Criteria andMovingAverageIdIsNull() {
-            addCriterion("moving_average_id is null");
+        public Criteria andAprioriSupportItemIdIsNull() {
+            addCriterion("apriori_support_item_id is null");
             return (Criteria) this;
         }
 
-        public Criteria andMovingAverageIdIsNotNull() {
-            addCriterion("moving_average_id is not null");
+        public Criteria andAprioriSupportItemIdIsNotNull() {
+            addCriterion("apriori_support_item_id is not null");
             return (Criteria) this;
         }
 
-        public Criteria andMovingAverageIdEqualTo(Long value) {
-            addCriterion("moving_average_id =", value, "movingAverageId");
+        public Criteria andAprioriSupportItemIdEqualTo(Long value) {
+            addCriterion("apriori_support_item_id =", value, "aprioriSupportItemId");
             return (Criteria) this;
         }
 
-        public Criteria andMovingAverageIdNotEqualTo(Long value) {
-            addCriterion("moving_average_id <>", value, "movingAverageId");
+        public Criteria andAprioriSupportItemIdNotEqualTo(Long value) {
+            addCriterion("apriori_support_item_id <>", value, "aprioriSupportItemId");
             return (Criteria) this;
         }
 
-        public Criteria andMovingAverageIdGreaterThan(Long value) {
-            addCriterion("moving_average_id >", value, "movingAverageId");
+        public Criteria andAprioriSupportItemIdGreaterThan(Long value) {
+            addCriterion("apriori_support_item_id >", value, "aprioriSupportItemId");
             return (Criteria) this;
         }
 
-        public Criteria andMovingAverageIdGreaterThanOrEqualTo(Long value) {
-            addCriterion("moving_average_id >=", value, "movingAverageId");
+        public Criteria andAprioriSupportItemIdGreaterThanOrEqualTo(Long value) {
+            addCriterion("apriori_support_item_id >=", value, "aprioriSupportItemId");
             return (Criteria) this;
         }
 
-        public Criteria andMovingAverageIdLessThan(Long value) {
-            addCriterion("moving_average_id <", value, "movingAverageId");
+        public Criteria andAprioriSupportItemIdLessThan(Long value) {
+            addCriterion("apriori_support_item_id <", value, "aprioriSupportItemId");
             return (Criteria) this;
         }
 
-        public Criteria andMovingAverageIdLessThanOrEqualTo(Long value) {
-            addCriterion("moving_average_id <=", value, "movingAverageId");
+        public Criteria andAprioriSupportItemIdLessThanOrEqualTo(Long value) {
+            addCriterion("apriori_support_item_id <=", value, "aprioriSupportItemId");
             return (Criteria) this;
         }
 
-        public Criteria andMovingAverageIdIn(List<Long> values) {
-            addCriterion("moving_average_id in", values, "movingAverageId");
+        public Criteria andAprioriSupportItemIdIn(List<Long> values) {
+            addCriterion("apriori_support_item_id in", values, "aprioriSupportItemId");
             return (Criteria) this;
         }
 
-        public Criteria andMovingAverageIdNotIn(List<Long> values) {
-            addCriterion("moving_average_id not in", values, "movingAverageId");
+        public Criteria andAprioriSupportItemIdNotIn(List<Long> values) {
+            addCriterion("apriori_support_item_id not in", values, "aprioriSupportItemId");
             return (Criteria) this;
         }
 
-        public Criteria andMovingAverageIdBetween(Long value1, Long value2) {
-            addCriterion("moving_average_id between", value1, value2, "movingAverageId");
+        public Criteria andAprioriSupportItemIdBetween(Long value1, Long value2) {
+            addCriterion("apriori_support_item_id between", value1, value2, "aprioriSupportItemId");
             return (Criteria) this;
         }
 
-        public Criteria andMovingAverageIdNotBetween(Long value1, Long value2) {
-            addCriterion("moving_average_id not between", value1, value2, "movingAverageId");
+        public Criteria andAprioriSupportItemIdNotBetween(Long value1, Long value2) {
+            addCriterion("apriori_support_item_id not between", value1, value2, "aprioriSupportItemId");
             return (Criteria) this;
         }
 
-        public Criteria andOrganizationIdIsNull() {
-            addCriterion("organization_id is null");
+        public Criteria andAprioriSupportIdIsNull() {
+            addCriterion("apriori_support_id is null");
             return (Criteria) this;
         }
 
-        public Criteria andOrganizationIdIsNotNull() {
-            addCriterion("organization_id is not null");
+        public Criteria andAprioriSupportIdIsNotNull() {
+            addCriterion("apriori_support_id is not null");
             return (Criteria) this;
         }
 
-        public Criteria andOrganizationIdEqualTo(Long value) {
-            addCriterion("organization_id =", value, "organizationId");
+        public Criteria andAprioriSupportIdEqualTo(Long value) {
+            addCriterion("apriori_support_id =", value, "aprioriSupportId");
             return (Criteria) this;
         }
 
-        public Criteria andOrganizationIdNotEqualTo(Long value) {
-            addCriterion("organization_id <>", value, "organizationId");
+        public Criteria andAprioriSupportIdNotEqualTo(Long value) {
+            addCriterion("apriori_support_id <>", value, "aprioriSupportId");
             return (Criteria) this;
         }
 
-        public Criteria andOrganizationIdGreaterThan(Long value) {
-            addCriterion("organization_id >", value, "organizationId");
+        public Criteria andAprioriSupportIdGreaterThan(Long value) {
+            addCriterion("apriori_support_id >", value, "aprioriSupportId");
             return (Criteria) this;
         }
 
-        public Criteria andOrganizationIdGreaterThanOrEqualTo(Long value) {
-            addCriterion("organization_id >=", value, "organizationId");
+        public Criteria andAprioriSupportIdGreaterThanOrEqualTo(Long value) {
+            addCriterion("apriori_support_id >=", value, "aprioriSupportId");
             return (Criteria) this;
         }
 
-        public Criteria andOrganizationIdLessThan(Long value) {
-            addCriterion("organization_id <", value, "organizationId");
+        public Criteria andAprioriSupportIdLessThan(Long value) {
+            addCriterion("apriori_support_id <", value, "aprioriSupportId");
             return (Criteria) this;
         }
 
-        public Criteria andOrganizationIdLessThanOrEqualTo(Long value) {
-            addCriterion("organization_id <=", value, "organizationId");
+        public Criteria andAprioriSupportIdLessThanOrEqualTo(Long value) {
+            addCriterion("apriori_support_id <=", value, "aprioriSupportId");
             return (Criteria) this;
         }
 
-        public Criteria andOrganizationIdIn(List<Long> values) {
-            addCriterion("organization_id in", values, "organizationId");
+        public Criteria andAprioriSupportIdIn(List<Long> values) {
+            addCriterion("apriori_support_id in", values, "aprioriSupportId");
             return (Criteria) this;
         }
 
-        public Criteria andOrganizationIdNotIn(List<Long> values) {
-            addCriterion("organization_id not in", values, "organizationId");
+        public Criteria andAprioriSupportIdNotIn(List<Long> values) {
+            addCriterion("apriori_support_id not in", values, "aprioriSupportId");
             return (Criteria) this;
         }
 
-        public Criteria andOrganizationIdBetween(Long value1, Long value2) {
-            addCriterion("organization_id between", value1, value2, "organizationId");
+        public Criteria andAprioriSupportIdBetween(Long value1, Long value2) {
+            addCriterion("apriori_support_id between", value1, value2, "aprioriSupportId");
             return (Criteria) this;
         }
 
-        public Criteria andOrganizationIdNotBetween(Long value1, Long value2) {
-            addCriterion("organization_id not between", value1, value2, "organizationId");
+        public Criteria andAprioriSupportIdNotBetween(Long value1, Long value2) {
+            addCriterion("apriori_support_id not between", value1, value2, "aprioriSupportId");
             return (Criteria) this;
         }
 
@@ -285,183 +285,63 @@ public class HMovingAverageCriteria {
             return (Criteria) this;
         }
 
-        public Criteria andQuantityIsNull() {
-            addCriterion("quantity is null");
+        public Criteria andSeqIsNull() {
+            addCriterion("seq is null");
             return (Criteria) this;
         }
 
-        public Criteria andQuantityIsNotNull() {
-            addCriterion("quantity is not null");
+        public Criteria andSeqIsNotNull() {
+            addCriterion("seq is not null");
             return (Criteria) this;
         }
 
-        public Criteria andQuantityEqualTo(Integer value) {
-            addCriterion("quantity =", value, "quantity");
+        public Criteria andSeqEqualTo(Integer value) {
+            addCriterion("seq =", value, "seq");
             return (Criteria) this;
         }
 
-        public Criteria andQuantityNotEqualTo(Integer value) {
-            addCriterion("quantity <>", value, "quantity");
+        public Criteria andSeqNotEqualTo(Integer value) {
+            addCriterion("seq <>", value, "seq");
             return (Criteria) this;
         }
 
-        public Criteria andQuantityGreaterThan(Integer value) {
-            addCriterion("quantity >", value, "quantity");
+        public Criteria andSeqGreaterThan(Integer value) {
+            addCriterion("seq >", value, "seq");
             return (Criteria) this;
         }
 
-        public Criteria andQuantityGreaterThanOrEqualTo(Integer value) {
-            addCriterion("quantity >=", value, "quantity");
+        public Criteria andSeqGreaterThanOrEqualTo(Integer value) {
+            addCriterion("seq >=", value, "seq");
             return (Criteria) this;
         }
 
-        public Criteria andQuantityLessThan(Integer value) {
-            addCriterion("quantity <", value, "quantity");
+        public Criteria andSeqLessThan(Integer value) {
+            addCriterion("seq <", value, "seq");
             return (Criteria) this;
         }
 
-        public Criteria andQuantityLessThanOrEqualTo(Integer value) {
-            addCriterion("quantity <=", value, "quantity");
+        public Criteria andSeqLessThanOrEqualTo(Integer value) {
+            addCriterion("seq <=", value, "seq");
             return (Criteria) this;
         }
 
-        public Criteria andQuantityIn(List<Integer> values) {
-            addCriterion("quantity in", values, "quantity");
+        public Criteria andSeqIn(List<Integer> values) {
+            addCriterion("seq in", values, "seq");
             return (Criteria) this;
         }
 
-        public Criteria andQuantityNotIn(List<Integer> values) {
-            addCriterion("quantity not in", values, "quantity");
+        public Criteria andSeqNotIn(List<Integer> values) {
+            addCriterion("seq not in", values, "seq");
             return (Criteria) this;
         }
 
-        public Criteria andQuantityBetween(Integer value1, Integer value2) {
-            addCriterion("quantity between", value1, value2, "quantity");
+        public Criteria andSeqBetween(Integer value1, Integer value2) {
+            addCriterion("seq between", value1, value2, "seq");
             return (Criteria) this;
         }
 
-        public Criteria andQuantityNotBetween(Integer value1, Integer value2) {
-            addCriterion("quantity not between", value1, value2, "quantity");
-            return (Criteria) this;
-        }
-
-        public Criteria andYearIsNull() {
-            addCriterion("year is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andYearIsNotNull() {
-            addCriterion("year is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andYearEqualTo(Integer value) {
-            addCriterion("year =", value, "year");
-            return (Criteria) this;
-        }
-
-        public Criteria andYearNotEqualTo(Integer value) {
-            addCriterion("year <>", value, "year");
-            return (Criteria) this;
-        }
-
-        public Criteria andYearGreaterThan(Integer value) {
-            addCriterion("year >", value, "year");
-            return (Criteria) this;
-        }
-
-        public Criteria andYearGreaterThanOrEqualTo(Integer value) {
-            addCriterion("year >=", value, "year");
-            return (Criteria) this;
-        }
-
-        public Criteria andYearLessThan(Integer value) {
-            addCriterion("year <", value, "year");
-            return (Criteria) this;
-        }
-
-        public Criteria andYearLessThanOrEqualTo(Integer value) {
-            addCriterion("year <=", value, "year");
-            return (Criteria) this;
-        }
-
-        public Criteria andYearIn(List<Integer> values) {
-            addCriterion("year in", values, "year");
-            return (Criteria) this;
-        }
-
-        public Criteria andYearNotIn(List<Integer> values) {
-            addCriterion("year not in", values, "year");
-            return (Criteria) this;
-        }
-
-        public Criteria andYearBetween(Integer value1, Integer value2) {
-            addCriterion("year between", value1, value2, "year");
-            return (Criteria) this;
-        }
-
-        public Criteria andYearNotBetween(Integer value1, Integer value2) {
-            addCriterion("year not between", value1, value2, "year");
-            return (Criteria) this;
-        }
-
-        public Criteria andMonthIsNull() {
-            addCriterion("month is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andMonthIsNotNull() {
-            addCriterion("month is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andMonthEqualTo(Integer value) {
-            addCriterion("month =", value, "month");
-            return (Criteria) this;
-        }
-
-        public Criteria andMonthNotEqualTo(Integer value) {
-            addCriterion("month <>", value, "month");
-            return (Criteria) this;
-        }
-
-        public Criteria andMonthGreaterThan(Integer value) {
-            addCriterion("month >", value, "month");
-            return (Criteria) this;
-        }
-
-        public Criteria andMonthGreaterThanOrEqualTo(Integer value) {
-            addCriterion("month >=", value, "month");
-            return (Criteria) this;
-        }
-
-        public Criteria andMonthLessThan(Integer value) {
-            addCriterion("month <", value, "month");
-            return (Criteria) this;
-        }
-
-        public Criteria andMonthLessThanOrEqualTo(Integer value) {
-            addCriterion("month <=", value, "month");
-            return (Criteria) this;
-        }
-
-        public Criteria andMonthIn(List<Integer> values) {
-            addCriterion("month in", values, "month");
-            return (Criteria) this;
-        }
-
-        public Criteria andMonthNotIn(List<Integer> values) {
-            addCriterion("month not in", values, "month");
-            return (Criteria) this;
-        }
-
-        public Criteria andMonthBetween(Integer value1, Integer value2) {
-            addCriterion("month between", value1, value2, "month");
-            return (Criteria) this;
-        }
-
-        public Criteria andMonthNotBetween(Integer value1, Integer value2) {
-            addCriterion("month not between", value1, value2, "month");
+        public Criteria andSeqNotBetween(Integer value1, Integer value2) {
+            addCriterion("seq not between", value1, value2, "seq");
             return (Criteria) this;
         }
 

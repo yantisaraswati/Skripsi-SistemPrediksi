@@ -1,9 +1,12 @@
 package com.yanti.inventorycontroll.domain.repository.requestitem;
 
+import java.util.List;
+
+import org.apache.ibatis.annotations.Param;
+
+import com.yanti.inventorycontroll.domain.dto.apriori.ItemTransaction;
 import com.yanti.inventorycontroll.domain.model.requestitem.TRequestItem;
 import com.yanti.inventorycontroll.domain.model.requestitem.TRequestItemCriteria;
-import java.util.List;
-import org.apache.ibatis.annotations.Param;
 
 public interface TRequestItemRepository {
     long countByCriteria(TRequestItemCriteria criteria);
@@ -27,4 +30,6 @@ public interface TRequestItemRepository {
     int updateByPrimaryKeySelective(TRequestItem row);
 
     int updateByPrimaryKey(TRequestItem row);
+    
+    List<ItemTransaction> selectAllItemTransaction(@Param("organizationId") Long organizationId);
 }
