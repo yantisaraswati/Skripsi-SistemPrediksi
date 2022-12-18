@@ -81,7 +81,7 @@
 					                    <td style="width:40%;">${movingAverage.itemName}</td>
 					                    <td style="width:10%;">${movingAverage.unit}</td>
 					                    <td style="width:10%;">${movingAverage.NMonth} Bulan</td>
-					                    <td style="width:10%;" class="_center">${movingAverage.forecast}</td>
+					                    <td style="width:10%;" class="_center"><fmt:formatNumber type="number" maxFractionDigits="2" value="${movingAverage.forecast}"/></td>
 					                </tr>
 					                <tr id="${movingAverage.movingAverageId}" style="display:none">
 					                	<td colspan="6">
@@ -99,18 +99,18 @@
 						                			<tr>
 							                			<td class="_center">${detail.period}</td>
 							                			<td class="_center">${detail.quantity}</td>
-							                			<td class="_center">${detail.forecast}</td>
-							                			<td class="_center">${detail.error}</td>
-							                			<td class="_center">${detail.errorAbsolute}</td>
-							                			<td class="_center">${detail.errorSquared}</td>
-							                			<td class="_center">${detail.errorPercentage}%</td>
+							                			<td class="_center"><fmt:formatNumber type="number" maxFractionDigits="2" value="${detail.forecast}"/></td>
+							                			<td class="_center"><fmt:formatNumber type="number" maxFractionDigits="2" value="${detail.error}"/></td>
+							                			<td class="_center"><fmt:formatNumber type="number" maxFractionDigits="2" value="${detail.errorAbsolute}"/></td>
+							                			<td class="_center"><fmt:formatNumber type="number" maxFractionDigits="2" value="${detail.errorSquared}"/></td>
+							                			<td class="_center"><fmt:formatNumber type="number" maxFractionDigits="2" value="${detail.errorPercentage}"/>%</td>
 							                		</tr>
 						                		</c:forEach>
 						                		<tr>
 						                			<td colspan="4" class="_right">Total</td>
-						                			<td class="_center">${movingAverage.mae}</td>
-						                			<td class="_center">${movingAverage.mse}</td>
-						                			<td class="_center">${movingAverage.mape}%</td>
+						                			<td class="_center"><fmt:formatNumber type="number" maxFractionDigits="2" value="${movingAverage.mae}"/></td>
+						                			<td class="_center"><fmt:formatNumber type="number" maxFractionDigits="2" value="${movingAverage.mse}"/></td>
+						                			<td class="_center"><fmt:formatNumber type="number" maxFractionDigits="2" value="${movingAverage.mape}"/>%</td>
 						                		</tr>
 						                	</table>
 					                	</td>
