@@ -1,10 +1,13 @@
 package com.yanti.inventorycontroll.domain.service.movingaverage;
 
-import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import javax.inject.Inject;
@@ -62,10 +65,11 @@ public class MovingAverageCalculateServiceImpl implements MovingAverageCalculate
 			int totalSaved = 0;
 			for (Long itemId : itemIds) {
 				List<RequestedItem> items = filterRequestedItem(itemId, requestedItemList);
-				if (items.size() < input.getTimeFrame())
+				List<RequestedItem> itemMonthSeries = generateItemForMonthSeries(items);
+				if (itemMonthSeries.size() < input.getTimeFrame())
 					continue;
 
-				List<HMovingAverageDetail> movingAverageDetailList = calculateMovingAverage(items, input.getTimeFrame());
+				List<HMovingAverageDetail> movingAverageDetailList = calculateMovingAverage(itemMonthSeries, input.getTimeFrame());
 				Long movingAverageId = saveMovingAverage(itemId, input.getOrganizationId(), input.getTimeFrame());
 				saveMovingAverageDetail(movingAverageId, movingAverageDetailList);
 
@@ -76,7 +80,7 @@ public class MovingAverageCalculateServiceImpl implements MovingAverageCalculate
 				throw new BusinessException("Tidak ada data yang diproses, karena jumlah permintaan terlalu sedikit.");
 			else if (totalSaved < itemIds.size())
 				throw new BusinessException("Sebagian data tidak diproses karena jumlah permintaan terlalu sedikit.");
-			
+
 			output.setSuccess(true);
 		} catch (BusinessException e) {
 			log.error("Error ", e);
@@ -162,13 +166,48 @@ public class MovingAverageCalculateServiceImpl implements MovingAverageCalculate
 		return itemInTimeFrame.stream().mapToDouble(RequestedItem::getQuantity).sum() / timeFrame;
 	}
 
+	private List<RequestedItem> generateItemForMonthSeries(List<RequestedItem> items) {
+		Date start = stringToDate(items.get(0).getPeriod() + "-01");
+		Date end = stringToDate(items.get(items.size() - 1).getPeriod() + "-01");
+		LocalDate startMonth = start.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+		LocalDate endMonth = end.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+		
+		List<RequestedItem> itemsMonthSeries = new ArrayList<>();
+		while (!startMonth.isAfter(endMonth)) {
+			Date month = Date.from(startMonth.atStartOfDay(ZoneId.systemDefault()).toInstant());
+			String period = new SimpleDateFormat("yyyy-MM").format(month);
+			Optional<RequestedItem> item = items.stream().filter(i -> i.getPeriod().equals(period)).findFirst();
+			if(item.isPresent())
+				itemsMonthSeries.add(item.get());
+			else {
+				RequestedItem emptyItem = new RequestedItem();
+				emptyItem.setPeriod(period);
+				emptyItem.setQuantity(0);
+				itemsMonthSeries.add(emptyItem);
+			}
+			
+			startMonth = startMonth.plusMonths(1);
+		}
+		return itemsMonthSeries;
+	}
+
+	private Date stringToDate(String startPeriod) {
+		try {
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+			sdf.setLenient(false);
+			return sdf.parse(startPeriod);
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
 	private List<RequestedItem> filterRequestedItem(Long itemId, List<RequestedItem> requestedItemList) {
 		return requestedItemList.stream().filter(i -> i.getItemId().equals(itemId)).collect(Collectors.toList());
 	}
 
 	private String getCurrentPeriod() {
-		DateFormat sdf = new SimpleDateFormat("yyyy-MM");
-		return sdf.format(new Date());
+		return new SimpleDateFormat("yyyy-MM").format(new Date());
 	}
 
 	private void deletePreviousData(MovingAverageCalculateServiceInputBean input) {

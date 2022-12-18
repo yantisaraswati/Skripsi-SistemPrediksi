@@ -106,8 +106,10 @@
 							                			<td class="_center"><fmt:formatNumber type="number" maxFractionDigits="2" value="${detail.errorPercentage}"/>%</td>
 							                		</tr>
 						                		</c:forEach>
-						                		<tr>
-						                			<td colspan="4" class="_right">Total</td>
+						                		<tr style="background-color: ghostwhite;">
+						                			<td colspan="2"></td>
+						                			<td class="_center"><fmt:formatNumber type="number" maxFractionDigits="2" value="${movingAverage.forecast}"/></td>
+						                			<td class="_right">Total</td>
 						                			<td class="_center"><fmt:formatNumber type="number" maxFractionDigits="2" value="${movingAverage.mae}"/></td>
 						                			<td class="_center"><fmt:formatNumber type="number" maxFractionDigits="2" value="${movingAverage.mse}"/></td>
 						                			<td class="_center"><fmt:formatNumber type="number" maxFractionDigits="2" value="${movingAverage.mape}"/>%</td>
