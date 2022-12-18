@@ -18,10 +18,15 @@ import com.yanti.inventorycontroll.domain.bean.apriori.AprioriCalculateServiceIn
 import com.yanti.inventorycontroll.domain.bean.apriori.AprioriCalculateServiceOutputBean;
 import com.yanti.inventorycontroll.domain.dto.apriori.ItemTransaction;
 import com.yanti.inventorycontroll.domain.model.apriori.HApriori;
+import com.yanti.inventorycontroll.domain.model.apriori.HAprioriCriteria;
 import com.yanti.inventorycontroll.domain.model.aprioriassociation.HAprioriAssociation;
+import com.yanti.inventorycontroll.domain.model.aprioriassociation.HAprioriAssociationCriteria;
 import com.yanti.inventorycontroll.domain.model.aprioriassociationitem.HAprioriAssociationItem;
+import com.yanti.inventorycontroll.domain.model.aprioriassociationitem.HAprioriAssociationItemCriteria;
 import com.yanti.inventorycontroll.domain.model.apriorisupport.HAprioriSupport;
+import com.yanti.inventorycontroll.domain.model.apriorisupport.HAprioriSupportCriteria;
 import com.yanti.inventorycontroll.domain.model.apriorisupportitem.HAprioriSupportItem;
+import com.yanti.inventorycontroll.domain.model.apriorisupportitem.HAprioriSupportItemCriteria;
 import com.yanti.inventorycontroll.domain.model.item.MItem;
 import com.yanti.inventorycontroll.domain.repository.apriori.HAprioriRepository;
 import com.yanti.inventorycontroll.domain.repository.aprioriassociation.HAprioriAssociationRepository;
@@ -289,7 +294,7 @@ public class AprioriCalculateServiceImpl implements AprioriCalculateService {
 		} while (!itemSetSupport.isEmpty() && !itemSet.isEmpty());
 
 		if (KItemSet.isEmpty())
-			throw new BusinessException("Tidak ditemukan hasil yang sesuai, support terlalu besar.");
+			throw new BusinessException("Tidak ditemukan hasil yang sesuai dikarenakan nilai support yang terlalu besar atau data transaksi yang kurang komprehensif.");
 
 		return KItemSet;
 	}
@@ -338,11 +343,35 @@ public class AprioriCalculateServiceImpl implements AprioriCalculateService {
 	}
 
 	private void deletePreviousData(AprioriCalculateServiceInputBean input) {
-		aprioriAssociationItemRepo.deleteByCriteria(null);
-		aprioriAssociationRepo.deleteByCriteria(null);
-		aprioriSupportItemRepo.deleteByCriteria(null);
-		aprioriSupportRepo.deleteByCriteria(null);
-		aprioriRepo.deleteByCriteria(null);
+		HAprioriCriteria aprioriC = new HAprioriCriteria();
+		aprioriC.createCriteria().andMinSupportEqualTo(input.getMinSupport()).andMinConfidenceEqualTo(input.getMinConfidence()).andOrganizationIdEqualTo(input.getOrganizationId());
+		List<HApriori> aprioriList = aprioriRepo.selectByCriteria(aprioriC);
+		for(HApriori apriori : aprioriList) {
+			
+			HAprioriSupportCriteria aprioriSupportC = new HAprioriSupportCriteria();
+			aprioriSupportC.createCriteria().andAprioriIdEqualTo(apriori.getAprioriId());
+			List<HAprioriSupport> apprioriSupport = aprioriSupportRepo.selectByCriteria(aprioriSupportC);
+			for(HAprioriSupport support : apprioriSupport) {
+				
+				HAprioriSupportItemCriteria aprioriSupportItemC = new HAprioriSupportItemCriteria();
+				aprioriSupportItemC.createCriteria().andAprioriSupportIdEqualTo(support.getAprioriSupportId());
+				aprioriSupportItemRepo.deleteByCriteria(aprioriSupportItemC);
+			}
+			
+			HAprioriAssociationCriteria aprioriAssociationC = new HAprioriAssociationCriteria();
+			aprioriAssociationC.createCriteria().andAprioriIdEqualTo(apriori.getAprioriId());
+			List<HAprioriAssociation> apprioriAssociation = aprioriAssociationRepo.selectByCriteria(aprioriAssociationC);
+			for(HAprioriAssociation association : apprioriAssociation) {
+				
+				HAprioriAssociationItemCriteria aprioriAssociationItemC = new HAprioriAssociationItemCriteria();
+				aprioriAssociationItemC.createCriteria().andAprioriAssociationIdEqualTo(association.getAprioriAssociationId());
+				aprioriAssociationItemRepo.deleteByCriteria(aprioriAssociationItemC);
+			}
+			
+			aprioriSupportRepo.deleteByCriteria(aprioriSupportC);
+			aprioriAssociationRepo.deleteByCriteria(aprioriAssociationC);
+			aprioriRepo.deleteByPrimaryKey(apriori.getAprioriId());
+		}
 	}
 
 	private void prepareInitialData(AprioriCalculateServiceInputBean input) {

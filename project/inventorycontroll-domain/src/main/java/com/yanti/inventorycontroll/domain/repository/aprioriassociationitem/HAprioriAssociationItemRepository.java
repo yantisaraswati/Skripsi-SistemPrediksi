@@ -27,4 +27,6 @@ public interface HAprioriAssociationItemRepository {
     int updateByPrimaryKeySelective(HAprioriAssociationItem row);
 
     int updateByPrimaryKey(HAprioriAssociationItem row);
+
+	List<Long> selectProcessedItem(@Param("organizationId") Long organizationId);
 }

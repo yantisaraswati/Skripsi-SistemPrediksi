@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 import com.yanti.inventorycontroll.domain.dto.apriori.ItemTransaction;
+import com.yanti.inventorycontroll.domain.dto.movingaverage.RequestedItem;
 import com.yanti.inventorycontroll.domain.model.requestitem.TRequestItem;
 import com.yanti.inventorycontroll.domain.model.requestitem.TRequestItemCriteria;
 
@@ -32,4 +33,6 @@ public interface TRequestItemRepository {
     int updateByPrimaryKey(TRequestItem row);
     
     List<ItemTransaction> selectAllItemTransaction(@Param("organizationId") Long organizationId);
+    
+    List<RequestedItem> selectRequestedItem(@Param("organizationId") Long organizationId, @Param("itemIds") List<Long> itemIds);
 }

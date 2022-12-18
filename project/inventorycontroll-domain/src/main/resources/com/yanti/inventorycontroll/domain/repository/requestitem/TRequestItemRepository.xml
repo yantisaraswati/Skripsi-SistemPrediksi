@@ -268,4 +268,29 @@
 	where u.organization_id = #{organizationId}
 	order by r.created_date, ri.created_date
   </select>
+  
+  <resultMap id="requestedItemMap" type="com.yanti.inventorycontroll.domain.dto.movingaverage.RequestedItem">
+    <result column="period" property="period" />
+    <result column="item_id" property="itemId" />
+    <result column="item_name" property="itemName" />
+    <result column="quantity" property="quantity" />
+  </resultMap>
+  <select id="selectRequestedItem" resultMap="requestedItemMap">
+  	select 
+		to_char(r.created_date, 'yyyy-MM') as period,
+		i.item_id,
+		i.item_name,
+		sum(ri.quantity) as quantity
+	from t_request r
+		join t_request_item ri on ri.request_id = r.request_id
+		join m_user u on u.user_id = r.user_id
+		join m_item i on i.item_id = ri.item_id
+	where u.organization_id = #{organizationId}
+		and i.item_id in 
+		<foreach item="itemId" collection="itemIds" open="(" separator="," close=")">
+			#{itemId}
+		</foreach>
+	group by period, i.item_id
+	order by i.item_name, period
+  </select>
 </mapper>

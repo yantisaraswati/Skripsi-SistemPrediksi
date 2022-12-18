@@ -197,6 +197,9 @@ button{
 ._center{
     text-align:center;
 }
+._right{
+    text-align:right;
+}
 
 .blockUI.blockMsg.blockElement {
     position: fixed !important;

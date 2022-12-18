@@ -1,0 +1,332 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yanti.inventorycontroll.domain.repository.movingaveragedetail.HMovingAverageDetailRepository">
+  <resultMap id="BaseResultMap" type="com.yanti.inventorycontroll.domain.model.movingaveragedetail.HMovingAverageDetail">
+    <id column="moving_average_detail_id" jdbcType="BIGINT" property="movingAverageDetailId" />
+    <result column="moving_average_id" jdbcType="BIGINT" property="movingAverageId" />
+    <result column="period" jdbcType="VARCHAR" property="period" />
+    <result column="quantity" jdbcType="INTEGER" property="quantity" />
+    <result column="forecast" jdbcType="DOUBLE" property="forecast" />
+    <result column="error" jdbcType="DOUBLE" property="error" />
+    <result column="error_absolute" jdbcType="DOUBLE" property="errorAbsolute" />
+    <result column="error_squared" jdbcType="DOUBLE" property="errorSquared" />
+    <result column="error_percentage" jdbcType="DOUBLE" property="errorPercentage" />
+    <result column="created_by" jdbcType="BIGINT" property="createdBy" />
+    <result column="created_date" jdbcType="TIMESTAMP" property="createdDate" />
+    <result column="updated_by" jdbcType="BIGINT" property="updatedBy" />
+    <result column="updated_date" jdbcType="TIMESTAMP" property="updatedDate" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    moving_average_detail_id, moving_average_id, period, quantity, forecast, error, error_absolute, 
+    error_squared, error_percentage, created_by, created_date, updated_by, updated_date
+  </sql>
+  <select id="selectByCriteria" parameterType="com.yanti.inventorycontroll.domain.model.movingaveragedetail.HMovingAverageDetailCriteria" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from h_moving_average_detail
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from h_moving_average_detail
+    where moving_average_detail_id = #{movingAverageDetailId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from h_moving_average_detail
+    where moving_average_detail_id = #{movingAverageDetailId,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByCriteria" parameterType="com.yanti.inventorycontroll.domain.model.movingaveragedetail.HMovingAverageDetailCriteria">
+    delete from h_moving_average_detail
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" keyColumn="moving_average_detail_id" keyProperty="movingAverageDetailId" parameterType="com.yanti.inventorycontroll.domain.model.movingaveragedetail.HMovingAverageDetail" useGeneratedKeys="true">
+    insert into h_moving_average_detail (moving_average_id, period, quantity, 
+      forecast, error, error_absolute, 
+      error_squared, error_percentage, created_by, 
+      created_date, updated_by, updated_date
+      )
+    values (#{movingAverageId,jdbcType=BIGINT}, #{period,jdbcType=VARCHAR}, #{quantity,jdbcType=INTEGER}, 
+      #{forecast,jdbcType=DOUBLE}, #{error,jdbcType=DOUBLE}, #{errorAbsolute,jdbcType=DOUBLE}, 
+      #{errorSquared,jdbcType=DOUBLE}, #{errorPercentage,jdbcType=DOUBLE}, #{createdBy,jdbcType=BIGINT}, 
+      #{createdDate,jdbcType=TIMESTAMP}, #{updatedBy,jdbcType=BIGINT}, #{updatedDate,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" keyColumn="moving_average_detail_id" keyProperty="movingAverageDetailId" parameterType="com.yanti.inventorycontroll.domain.model.movingaveragedetail.HMovingAverageDetail" useGeneratedKeys="true">
+    insert into h_moving_average_detail
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="movingAverageId != null">
+        moving_average_id,
+      </if>
+      <if test="period != null">
+        period,
+      </if>
+      <if test="quantity != null">
+        quantity,
+      </if>
+      <if test="forecast != null">
+        forecast,
+      </if>
+      <if test="error != null">
+        error,
+      </if>
+      <if test="errorAbsolute != null">
+        error_absolute,
+      </if>
+      <if test="errorSquared != null">
+        error_squared,
+      </if>
+      <if test="errorPercentage != null">
+        error_percentage,
+      </if>
+      <if test="createdBy != null">
+        created_by,
+      </if>
+      <if test="createdDate != null">
+        created_date,
+      </if>
+      <if test="updatedBy != null">
+        updated_by,
+      </if>
+      <if test="updatedDate != null">
+        updated_date,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="movingAverageId != null">
+        #{movingAverageId,jdbcType=BIGINT},
+      </if>
+      <if test="period != null">
+        #{period,jdbcType=VARCHAR},
+      </if>
+      <if test="quantity != null">
+        #{quantity,jdbcType=INTEGER},
+      </if>
+      <if test="forecast != null">
+        #{forecast,jdbcType=DOUBLE},
+      </if>
+      <if test="error != null">
+        #{error,jdbcType=DOUBLE},
+      </if>
+      <if test="errorAbsolute != null">
+        #{errorAbsolute,jdbcType=DOUBLE},
+      </if>
+      <if test="errorSquared != null">
+        #{errorSquared,jdbcType=DOUBLE},
+      </if>
+      <if test="errorPercentage != null">
+        #{errorPercentage,jdbcType=DOUBLE},
+      </if>
+      <if test="createdBy != null">
+        #{createdBy,jdbcType=BIGINT},
+      </if>
+      <if test="createdDate != null">
+        #{createdDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedBy != null">
+        #{updatedBy,jdbcType=BIGINT},
+      </if>
+      <if test="updatedDate != null">
+        #{updatedDate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByCriteria" parameterType="com.yanti.inventorycontroll.domain.model.movingaveragedetail.HMovingAverageDetailCriteria" resultType="java.lang.Long">
+    select count(*) from h_moving_average_detail
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByCriteriaSelective" parameterType="map">
+    update h_moving_average_detail
+    <set>
+      <if test="row.movingAverageDetailId != null">
+        moving_average_detail_id = #{row.movingAverageDetailId,jdbcType=BIGINT},
+      </if>
+      <if test="row.movingAverageId != null">
+        moving_average_id = #{row.movingAverageId,jdbcType=BIGINT},
+      </if>
+      <if test="row.period != null">
+        period = #{row.period,jdbcType=VARCHAR},
+      </if>
+      <if test="row.quantity != null">
+        quantity = #{row.quantity,jdbcType=INTEGER},
+      </if>
+      <if test="row.forecast != null">
+        forecast = #{row.forecast,jdbcType=DOUBLE},
+      </if>
+      <if test="row.error != null">
+        error = #{row.error,jdbcType=DOUBLE},
+      </if>
+      <if test="row.errorAbsolute != null">
+        error_absolute = #{row.errorAbsolute,jdbcType=DOUBLE},
+      </if>
+      <if test="row.errorSquared != null">
+        error_squared = #{row.errorSquared,jdbcType=DOUBLE},
+      </if>
+      <if test="row.errorPercentage != null">
+        error_percentage = #{row.errorPercentage,jdbcType=DOUBLE},
+      </if>
+      <if test="row.createdBy != null">
+        created_by = #{row.createdBy,jdbcType=BIGINT},
+      </if>
+      <if test="row.createdDate != null">
+        created_date = #{row.createdDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="row.updatedBy != null">
+        updated_by = #{row.updatedBy,jdbcType=BIGINT},
+      </if>
+      <if test="row.updatedDate != null">
+        updated_date = #{row.updatedDate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="example != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByCriteria" parameterType="map">
+    update h_moving_average_detail
+    set moving_average_detail_id = #{row.movingAverageDetailId,jdbcType=BIGINT},
+      moving_average_id = #{row.movingAverageId,jdbcType=BIGINT},
+      period = #{row.period,jdbcType=VARCHAR},
+      quantity = #{row.quantity,jdbcType=INTEGER},
+      forecast = #{row.forecast,jdbcType=DOUBLE},
+      error = #{row.error,jdbcType=DOUBLE},
+      error_absolute = #{row.errorAbsolute,jdbcType=DOUBLE},
+      error_squared = #{row.errorSquared,jdbcType=DOUBLE},
+      error_percentage = #{row.errorPercentage,jdbcType=DOUBLE},
+      created_by = #{row.createdBy,jdbcType=BIGINT},
+      created_date = #{row.createdDate,jdbcType=TIMESTAMP},
+      updated_by = #{row.updatedBy,jdbcType=BIGINT},
+      updated_date = #{row.updatedDate,jdbcType=TIMESTAMP}
+    <if test="example != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.yanti.inventorycontroll.domain.model.movingaveragedetail.HMovingAverageDetail">
+    update h_moving_average_detail
+    <set>
+      <if test="movingAverageId != null">
+        moving_average_id = #{movingAverageId,jdbcType=BIGINT},
+      </if>
+      <if test="period != null">
+        period = #{period,jdbcType=VARCHAR},
+      </if>
+      <if test="quantity != null">
+        quantity = #{quantity,jdbcType=INTEGER},
+      </if>
+      <if test="forecast != null">
+        forecast = #{forecast,jdbcType=DOUBLE},
+      </if>
+      <if test="error != null">
+        error = #{error,jdbcType=DOUBLE},
+      </if>
+      <if test="errorAbsolute != null">
+        error_absolute = #{errorAbsolute,jdbcType=DOUBLE},
+      </if>
+      <if test="errorSquared != null">
+        error_squared = #{errorSquared,jdbcType=DOUBLE},
+      </if>
+      <if test="errorPercentage != null">
+        error_percentage = #{errorPercentage,jdbcType=DOUBLE},
+      </if>
+      <if test="createdBy != null">
+        created_by = #{createdBy,jdbcType=BIGINT},
+      </if>
+      <if test="createdDate != null">
+        created_date = #{createdDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedBy != null">
+        updated_by = #{updatedBy,jdbcType=BIGINT},
+      </if>
+      <if test="updatedDate != null">
+        updated_date = #{updatedDate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where moving_average_detail_id = #{movingAverageDetailId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.yanti.inventorycontroll.domain.model.movingaveragedetail.HMovingAverageDetail">
+    update h_moving_average_detail
+    set moving_average_id = #{movingAverageId,jdbcType=BIGINT},
+      period = #{period,jdbcType=VARCHAR},
+      quantity = #{quantity,jdbcType=INTEGER},
+      forecast = #{forecast,jdbcType=DOUBLE},
+      error = #{error,jdbcType=DOUBLE},
+      error_absolute = #{errorAbsolute,jdbcType=DOUBLE},
+      error_squared = #{errorSquared,jdbcType=DOUBLE},
+      error_percentage = #{errorPercentage,jdbcType=DOUBLE},
+      created_by = #{createdBy,jdbcType=BIGINT},
+      created_date = #{createdDate,jdbcType=TIMESTAMP},
+      updated_by = #{updatedBy,jdbcType=BIGINT},
+      updated_date = #{updatedDate,jdbcType=TIMESTAMP}
+    where moving_average_detail_id = #{movingAverageDetailId,jdbcType=BIGINT}
+  </update>
+</mapper>

@@ -21,16 +21,16 @@ Configuration 1.0//EN" "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd"
 			password="ndid123" />		
 		
 		<!-- Transaction Package -->
-		<javaModelGenerator targetPackage="com.yanti.inventorycontroll.domain.model.aprioriassociationitem" 
+		<javaModelGenerator targetPackage="com.yanti.inventorycontroll.domain.model.movingaveragedetail" 
 			targetProject="inventorycontroll-domain/src/main/java" />
-		<sqlMapGenerator targetPackage="com.yanti.inventorycontroll.domain.repository.aprioriassociationitem" 
+		<sqlMapGenerator targetPackage="com.yanti.inventorycontroll.domain.repository.movingaveragedetail" 
 			targetProject="inventorycontroll-domain/src/main/resources" />
-		<javaClientGenerator targetPackage="com.yanti.inventorycontroll.domain.repository.aprioriassociationitem" 
+		<javaClientGenerator targetPackage="com.yanti.inventorycontroll.domain.repository.movingaveragedetail" 
 			targetProject="inventorycontroll-domain/src/main/java" type="XMLMAPPER" />
 			
-		<table schema="public" tableName="h_apriori_association_item">
+		<table schema="public" tableName="h_moving_average_detail">
 			<property name="ignoreQualifiersAtRuntime" value="true" />
-			<generatedKey column="apriori_association_item_id" sqlStatement="JDBC" identity="true" />
+			<generatedKey column="moving_average_detail_id" sqlStatement="JDBC" identity="true" />
 		</table>
 	</context>
 </generatorConfiguration>

@@ -235,4 +235,14 @@
       updated_date = #{updatedDate,jdbcType=TIMESTAMP}
     where apriori_association_item_id = #{aprioriAssociationItemId,jdbcType=BIGINT}
   </update>
+  
+  <select id="selectProcessedItem" resultType="java.lang.Long">
+  	select distinct
+		i.item_id
+	from h_apriori a
+		join h_apriori_association aa on aa.apriori_id = a.apriori_id
+		join h_apriori_association_item aai on aai.apriori_association_id = aa.apriori_association_id
+		join m_item i on i.item_id = aai.item_id
+	where a.organization_id = #{organizationId}
+  </select>
 </mapper>

@@ -6,6 +6,8 @@ import java.util.List;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import com.yanti.inventorycontroll.domain.dto.movingaverage.RequestedItem;
+
 import mockit.Tested;
 import mockit.integration.junit4.JMockit;
 
@@ -38,5 +40,27 @@ public class MainTest {
 	public void test_createRules() {
 		System.out.println(target.createRules(Arrays.asList(1L,1L)));
 		System.out.println(target.createRules(Arrays.asList(1L,1L,1L,1L)));
+	}
+	
+	@Test
+	public void testCheck() {
+		List<Integer> nums = Arrays.asList(3,4);
+		
+		int n = 2;
+		Double forecast = null;
+		for(int i = 0; i < nums.size(); i++) {
+			Double error = (i < n) ? null : nums.get(i) - forecast;
+			System.out.println(forecast + " " + error);
+			forecast = check(nums, i, n);
+		}
+		System.out.println(forecast/n);
+	}
+	
+	Double check(List<Integer> nums, int i, int n) {
+		if(i - (n - 1) < 0)
+			return null;
+		
+		List<Integer> itemInTimeFrame = nums.subList(i - (n - 1), i+1);
+		return (double) itemInTimeFrame.stream().reduce(0,Integer::sum) / (double) n;
 	}
 }
