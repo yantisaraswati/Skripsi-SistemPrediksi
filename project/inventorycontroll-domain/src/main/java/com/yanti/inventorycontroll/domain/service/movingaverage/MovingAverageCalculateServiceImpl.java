@@ -126,13 +126,18 @@ public class MovingAverageCalculateServiceImpl implements MovingAverageCalculate
 		double totalErrorPercentage = 0;
 
 		List<HMovingAverageDetail> movingAverageDetailList = new ArrayList<>();
+		Double lastNofInfiniteValue = null;
 		for (int i = 0; i < items.size(); i++) {
 			Integer quantity = items.get(i).getQuantity();
 			Double error = (i < timeFrame) ? null : quantity - forecast;
 			Double errorAbsolute = (i < timeFrame) ? null : Math.abs(error);
 			Double errorSquared = (i < timeFrame) ? null : Math.pow(error, 2);
 			Double errorPercentage = (i < timeFrame) ? null : (errorAbsolute / quantity) * 100;
-
+			if(errorPercentage != null && Double.isInfinite(errorPercentage))
+				errorPercentage = lastNofInfiniteValue;
+			else
+				lastNofInfiniteValue = errorPercentage;
+			
 			totalErrorAbsolute += (i < timeFrame) ? 0 : errorAbsolute;
 			totalErrorSquared += (i < timeFrame) ? 0 : errorSquared;
 			totalErrorPercentage += (i < timeFrame) ? 0 : errorPercentage;
