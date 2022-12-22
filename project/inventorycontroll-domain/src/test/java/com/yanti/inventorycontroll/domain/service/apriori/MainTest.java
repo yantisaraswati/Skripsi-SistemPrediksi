@@ -38,8 +38,12 @@ public class MainTest {
 	
 	@Test
 	public void test_createRules() {
-		System.out.println(target.createRules(Arrays.asList(1L,1L)));
-		System.out.println(target.createRules(Arrays.asList(1L,1L,1L,1L)));
+//		System.out.println(target.createRules(Arrays.asList(1L,1L)));
+//		System.out.println(target.createRules(Arrays.asList(1L,1L,1L,1L)));
+		
+		String regex = "[^a-zA-Z0-9]";
+		String str = "[ te{ s] t]ing a~!@#$%^&*(){}+=\\\\|?/<>,.:;'";
+		System.out.println(str +" = "+ str.replaceAll(regex, ""));
 	}
 	
 	@Test
