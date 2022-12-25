@@ -188,6 +188,12 @@ public class AprioriCalculateServiceImpl implements AprioriCalculateService {
 		return apriori.getAprioriId();
 	}
 
+	/** 
+	 * Berfungsi untuk membangun final rules dari item set confidence yang didapat
+	 * @param kItemSet
+	 * @param kItemAssociation
+	 * @return
+	 */
 	private List<FinalRule> determineFinalRules(List<LinkedHashMap<List<Long>, Integer>> kItemSet, List<LinkedHashMap<List<Long>, Integer>> kItemAssociation) {
 		List<FinalRule> finalRules = new ArrayList<>();
 		for(LinkedHashMap<List<Long>, Integer> itemAssociation : kItemAssociation) {
@@ -200,6 +206,7 @@ public class AprioriCalculateServiceImpl implements AprioriCalculateService {
 				rule.setItemId(association.getKey());
 				finalRules.add(rule);
 				
+				// Untuk menentukan nilai tertinggi dari support * confidencenya
 				if(rule.getSuppTimesConf() > maxSuppTimesConf)
 					maxSuppTimesConf = rule.getSuppTimesConf();
 			}
@@ -217,6 +224,13 @@ public class AprioriCalculateServiceImpl implements AprioriCalculateService {
 		return 0;
 	}
 
+	/**
+	 * Berfungsi untuk membangun kalimat dari kombinasi barang yang didapat
+	 * misal set barang 1, 2, 3, 4 -> jika meminta 1, 2, 3, maka meminta 4
+	 * misal set barang 6, 5 -> jika meminta 6, maka meminta 5
+	 * @param key
+	 * @return
+	 */
 	String createRules(List<Long> key) {
 		String rules = "Jika meminta";
 		for (int i = 0; i < key.size(); i++) {
@@ -230,6 +244,11 @@ public class AprioriCalculateServiceImpl implements AprioriCalculateService {
 		return rules;
 	}
 
+	/** 
+	 * Bergfungsi untuk membangun asosiasi dari item set support yang didapat
+	 * @param kItemSet
+	 * @return
+	 */
 	private List<LinkedHashMap<List<Long>, Integer>> generateAssociationRule(List<LinkedHashMap<List<Long>, Integer>> kItemSet) {
 		List<LinkedHashMap<List<Long>, Integer>> kItemAssociation = new ArrayList<>();
 		LinkedHashMap<List<Long>, Integer> itemSetConfidence = new LinkedHashMap<>();
@@ -244,13 +263,19 @@ public class AprioriCalculateServiceImpl implements AprioriCalculateService {
 
 		return kItemAssociation;
 	}
-
+	
+	/**
+	 * Berfungsi untuk menghitung asosiasi dari data atencendent dengan total transaksinya
+	 * @param itemsKn
+	 * @param support
+	 * @return
+	 */
 	private LinkedHashMap<List<Long>, Integer> calculateAssociationConfidence(List<Long> itemsKn, Integer support) {
 		LinkedHashMap<List<Long>, Integer> itemSetConfidence = new LinkedHashMap<>();
 		List<List<Long>> ruleCombination = determineRuleCombination(itemsKn);
 
 		for (List<Long> combination : ruleCombination) {
-			List<Long> antecendent = combination.subList(0, itemsKn.size() - 1);
+			List<Long> antecendent = combination.subList(0, itemsKn.size() - 1); // misal a, b, c, d -> jika meminta a, b, c, maka meminta d, atencenden adalah a,b,c
 			int totalN = getTotalTransaction(combination);
 			int totalAntecendent = getTotalTransaction(antecendent);
 			int confidence = (totalN * 100) / totalAntecendent;
@@ -273,6 +298,11 @@ public class AprioriCalculateServiceImpl implements AprioriCalculateService {
 		return ruleCombination;
 	}
 
+	/**
+	 * Berfungsi untuk mencari kombinasi barang dan menghitung masing-masing supportnya lalu dibandingkan dengan minSupport yang diminta
+	 * 
+	 * @return
+	 */
 	private List<LinkedHashMap<List<Long>, Integer>> generateKItemSet() {
 		List<LinkedHashMap<List<Long>, Integer>> KItemSet = new ArrayList<>();
 		LinkedHashMap<List<Long>, Integer> itemSetSupport = new LinkedHashMap<>();
@@ -299,11 +329,25 @@ public class AprioriCalculateServiceImpl implements AprioriCalculateService {
 		return KItemSet;
 	}
 
+	/** 
+	 * Berfungsi untuk membuat kombinasi dari sisa barang misal barang [8, 9, 4, 69] itemset 2
+	 * maka hasilnya [[8, 9], [8, 4], [8, 69], [9, 4], [9, 69], [4, 69]], dst
+	 * @param kItem
+	 * @param nItemSet
+	 * @return
+	 */
 	private List<List<Long>> getItemCombination(List<Long> kItem, int nItemSet) {
 		List<List<Long>> itemCombination = Generator.combination(kItem).simple(nItemSet).stream().collect(Collectors.toList());
 		return itemCombination;
 	}
 
+	/**
+	 * berfungsi untuk mengecek barang apa saja yang masih sesudai dengan minimal support
+	 * misal dari k-item-set2 yang lolos adalah 2item set A: {barang 1, barang 2}, set B: {barang 2, barang 4}
+	 * berarti data barang yang dapat dihitung lebih lanjut adalah barang 1, barang 2, dan barang 4
+	 * @param itemSetSupport
+	 * @return
+	 */
 	private List<Long> getEligibleItem(LinkedHashMap<List<Long>, Integer> itemSetSupport) {
 		List<Long> remainingItem = new ArrayList<>();
 		List<List<Long>> itemSet = new ArrayList<>(itemSetSupport.keySet());
@@ -313,6 +357,13 @@ public class AprioriCalculateServiceImpl implements AprioriCalculateService {
 		return remainingItem.stream().distinct().collect(Collectors.toList());
 	}
 
+	/**
+	 * Berfungsi untuk menghitung nilai support dari item set barang dan dibandingkan dengan minimal supportnya, misal 
+	 * k-item set 1 : bolpoint -> total transaksi yang berisi bolpoint / total transaksi
+	 * k-item set 2 : bolpoint, kertas -> total transaksi yang berisi bolpoint, kertas / total transaksi
+	 * @param itemSet
+	 * @return
+	 */
 	private LinkedHashMap<List<Long>, Integer> calculateItemSetSupport(List<List<Long>> itemSet) {
 		LinkedHashMap<List<Long>, Integer> itemSetSupport = new LinkedHashMap<>();
 		for (List<Long> items : itemSet) {
@@ -324,10 +375,20 @@ public class AprioriCalculateServiceImpl implements AprioriCalculateService {
 		return itemSetSupport;
 	}
 
+	/**
+	 * berfungsi untuk mengecek transaksi yang berisi barang tertentu
+	 * @param items
+	 * @return
+	 */
 	private int getTotalTransaction(List<Long> items) {
 		return (int) allTransactionItem.stream().filter(t -> t.getItems().containsAll(items)).count();
 	}
-
+	
+	/**
+	 * Befungsi untuk menyusun informasi barang menjadi bentuk tabular sesuai dengan data permintaan
+	 * contoh ItemTransaction(requestId=21, items=[8, 9]) diubah menjadi List index 1 untuk transaksi 1 berisi barang {8,9}
+	 * @return
+	 */
 	private List<List<Long>> getDistinctItems() {
 		List<Long> items = new ArrayList<>();
 		List<List<Long>> itemSet = new ArrayList<>();
@@ -342,6 +403,11 @@ public class AprioriCalculateServiceImpl implements AprioriCalculateService {
 		return itemSet;
 	}
 
+	/**
+	 * Befungsi menghapus hasil apriori yang sebelumnya pernah dihitung berdasarkan minSUpport, minConfindence, bidang
+	 * data sebelumnya akan dihapus karena apriori yang ditampilkan ke halaman apriori hanya hasil terbaru saja
+	 * @param input
+	 */
 	private void deletePreviousData(AprioriCalculateServiceInputBean input) {
 		HAprioriCriteria aprioriC = new HAprioriCriteria();
 		aprioriC.createCriteria().andMinSupportEqualTo(input.getMinSupport()).andMinConfidenceEqualTo(input.getMinConfidence()).andOrganizationIdEqualTo(input.getOrganizationId());
@@ -374,8 +440,14 @@ public class AprioriCalculateServiceImpl implements AprioriCalculateService {
 		}
 	}
 
+	
+	/**
+	 * Berfungsi untuk set nilai nilai local variable yang digunakan selama proses perhitungan, dan mengambil semua 
+	 * data permintaan dan barang yang diminta contoh permintaan A berisi barang 1 dan barang 2 >> ItemTransaction(requestId=21, items=[8, 9])
+	 * @param input
+	 */
 	private void prepareInitialData(AprioriCalculateServiceInputBean input) {
-		this.allTransactionItem = requestItemRepo.selectAllItemTransaction(input.getOrganizationId());
+		this.allTransactionItem = requestItemRepo.selectAllItemTransaction(input.getOrganizationId()); // ambil semua permintaan secara detail 
 		this.totalTransaction = allTransactionItem.size();
 		this.minSupport = input.getMinSupport();
 		this.minConfidence = input.getMinConfidence();

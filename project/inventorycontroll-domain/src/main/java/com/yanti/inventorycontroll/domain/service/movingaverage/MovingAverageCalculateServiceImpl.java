@@ -66,7 +66,7 @@ public class MovingAverageCalculateServiceImpl implements MovingAverageCalculate
 			for (Long itemId : itemIds) {
 				List<RequestedItem> items = filterRequestedItem(itemId, requestedItemList);
 				List<RequestedItem> itemMonthSeries = generateItemForMonthSeries(items);
-				if (itemMonthSeries.size() < input.getTimeFrame())
+				if (itemMonthSeries.size() < input.getTimeFrame()) // Untuk cek jika total periode permintaan < bulan pendukung 
 					continue;
 
 				List<HMovingAverageDetail> movingAverageDetailList = calculateMovingAverage(itemMonthSeries, input.getTimeFrame());
@@ -119,6 +119,12 @@ public class MovingAverageCalculateServiceImpl implements MovingAverageCalculate
 		return movingAverage.getMovingAverageId();
 	}
 
+	/**
+	 * Melakukan perhitungan forecasting moving average dan error forecasting
+	 * @param items
+	 * @param timeFrame
+	 * @return
+	 */
 	private List<HMovingAverageDetail> calculateMovingAverage(List<RequestedItem> items, Integer timeFrame) {
 		Double forecast = null;
 		double totalErrorAbsolute = 0;
@@ -138,9 +144,9 @@ public class MovingAverageCalculateServiceImpl implements MovingAverageCalculate
 			else
 				lastNofInfiniteValue = errorPercentage;
 			
-			totalErrorAbsolute += (i < timeFrame) ? 0 : errorAbsolute;
-			totalErrorSquared += (i < timeFrame) ? 0 : errorSquared;
-			totalErrorPercentage += (i < timeFrame) ? 0 : errorPercentage;
+			totalErrorAbsolute += (i < timeFrame) || (errorAbsolute == null) ? 0 : errorAbsolute; // a += 1 sama denga a = a + 1
+			totalErrorSquared += (i < timeFrame) || (errorSquared == null) ? 0 : errorSquared;
+			totalErrorPercentage += (i < timeFrame) || (errorPercentage == null) ? 0 : errorPercentage;
 
 			HMovingAverageDetail movingAverageDetail = new HMovingAverageDetail();
 			movingAverageDetail.setPeriod(items.get(i).getPeriod());
@@ -157,7 +163,7 @@ public class MovingAverageCalculateServiceImpl implements MovingAverageCalculate
 
 		int n = items.size() - timeFrame;
 		this.forecast = forecast;
-		this.mae = totalErrorAbsolute / (n == 0 ? 1 : n);
+		this.mae = totalErrorAbsolute / (n == 0 ? 1 : n); // hitung totalErrorAbsolute dibagi dengan jika n = 0 maka bagi 1, tapi jika n != 0 maka bagi dengan n 
 		this.mse = totalErrorSquared / (n == 0 ? 1 : n);
 		this.mape = totalErrorPercentage / (n == 0 ? 1 : n);
 		return movingAverageDetailList;
@@ -171,6 +177,12 @@ public class MovingAverageCalculateServiceImpl implements MovingAverageCalculate
 		return itemInTimeFrame.stream().mapToDouble(RequestedItem::getQuantity).sum() / timeFrame;
 	}
 
+	/**
+	 * Berfungsi untuk mengisi permintaan barang untuk periode yang kosong
+	 * misal permintaan barang A muncul di Jan, Mar, Apr maka akan diubah menjadi Jan, Feb, Mar, Apr 
+	 * @param items
+	 * @return
+	 */
 	private List<RequestedItem> generateItemForMonthSeries(List<RequestedItem> items) {
 		Date start = stringToDate(items.get(0).getPeriod() + "-01");
 		Date end = stringToDate(items.get(items.size() - 1).getPeriod() + "-01");

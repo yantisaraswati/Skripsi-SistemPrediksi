@@ -43,7 +43,7 @@ public class AprioriLoadServiceImpl implements AprioriLoadService {
 	public AprioriLoadServiceOutputBean execute(AprioriLoadServiceInputBean input) {
 		AprioriLoadServiceOutputBean output = new AprioriLoadServiceOutputBean();
 		try {
-			if (input.getMinSupport() != null) {
+			if (input.getMinSupport() != null) { // pengecekan awal, jika nilainya null, berarti page baru dibuka
 				HApriori apriori = getApriori(input);
 				if (apriori != null) {
 					output.setItemSetSupportList(getItemSetSupport(apriori));
