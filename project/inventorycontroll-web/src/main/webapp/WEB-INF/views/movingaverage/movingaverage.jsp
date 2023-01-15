@@ -65,23 +65,23 @@
 						            <th rowspan="2">Periode</th>
 						            <th rowspan="2">Bidang</th>
 						            <th rowspan="2">Nama Barang</th>
-						            <th rowspan="2">Satuan</th>
-						            <th colspan="2">Prediksi ${movingAverageForm.predictedMonth} Bulan Selanjutnya</th>
+						            <th colspan="3">Prediksi ${movingAverageForm.predictedMonth} Bulan Selanjutnya</th>
 						        </tr>
 						        <tr style="background-color: unset">
 						            <th>Bulan Pendukung</th>
 						            <th>Jumlah</th>
+						            <th>Satuan</th>
 						        </tr>
 						    </thead>
 						    <tbody>
 							    <c:forEach var="movingAverage" items="${movingAverageList}">
-							    	<tr onclick="toggle(${movingAverage.movingAverageId})">
+							    	<tr onclick="toggle(${movingAverage.movingAverageId})" data-toggle="tooltip" title="Klik untuk menampilkan detail moving average.">
 					                    <td style="width:10%;" class="_center">${movingAverage.period}</td>
 					                    <td style="width:20%;">${movingAverage.organization}</td>
 					                    <td style="width:40%;">${movingAverage.itemName}</td>
-					                    <td style="width:10%;">${movingAverage.unit}</td>
 					                    <td style="width:10%;">${movingAverage.NMonth} Bulan</td>
 					                    <td style="width:10%;" class="_center"><fmt:formatNumber type="number" maxFractionDigits="2" value="${movingAverage.forecast}"/></td>
+					                    <td style="width:10%;">${movingAverage.unit}</td>
 					                </tr>
 					                <tr id="${movingAverage.movingAverageId}" style="display:none">
 					                	<td colspan="6">
@@ -129,7 +129,7 @@
 
 <script type="text/javascript">
     $("#link-movingaverage").addClass("active");
-    
+    $('[data-toggle="tooltip"]').tooltip();
     function toggle(id) {
     	var x = document.getElementById(id);
 		if (x.style.display === "none") {

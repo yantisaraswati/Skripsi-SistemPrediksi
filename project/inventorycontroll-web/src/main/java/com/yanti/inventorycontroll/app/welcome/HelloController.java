@@ -15,7 +15,7 @@ public class HelloController {
 
     @RequestMapping(value = "/", method = {RequestMethod.GET, RequestMethod.POST})
     public String home(Locale locale, Model model) {
-        return "dashboard/dashboard";
+        return "redirect:/request/load";
     }
 
 }
